@@ -1,7 +1,7 @@
 <template>
   <div id="signup">
-    <p v-if="submitted" class="alert alert-success">Your account has been created. To continue, please confirm your account by following the instruction in the email we've just sent you.</p>
-    <p v-if="error" class="alert alert-danger">Ooops, something went wrong. Make sure use submit the form correctly</p>
+    <p v-if="signedUp" class="alert alert-success">Your account has been created. To continue, please confirm your account by following the instruction in the email we've just sent you.</p>
+    <p v-if="signUpError" class="alert alert-danger">Ooops, something went wrong. Make sure to submit the form correctly.</p>
     
     <div class="signup-form">
       <form @submit.prevent="onSubmit">
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  
 
   export default {
     data () {
@@ -58,9 +58,7 @@
         first_name: '',
         last_name: '',
         password: '',
-        password_confirmation: '',
-        submitted: false,
-        error: false
+        password_confirmation: ''
       }
     },
     methods: {
@@ -73,17 +71,15 @@
           password_confirmation: this.password_confirmation
         }
         console.log(formData)
-        axios.post('http://54.38.36.242/api/users', formData)
-          .then(response => {
-            console.log(response);
-            if (response.status === 200) {
-              this.submitted = true;
-            }
-          })
-          .catch(error => {
-            console.log(error);
-            this.error = true;
-          })
+        this.$store.dispatch('signup', formData);
+      }
+    },
+    computed: {
+      signedUp(){
+        return this.$store.getters.signedUp;
+      },
+      signUpError(){
+        return this.$store.getters.signUpError;
       }
     }
   }
