@@ -20,4 +20,7 @@
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+  .alert {
+    text-align: center;
+  }
 </style>
