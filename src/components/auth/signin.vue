@@ -1,5 +1,7 @@
 <template>
   <div id="signin">
+    <p v-if="signedIn" class="alert alert-success">You've successfully signed in</p>
+    <p v-if="signInError" class="alert alert-danger">Invalid email or password. Please try again.</p>
     <div class="signin-form">
       <form @submit.prevent="onSubmit">
         <div class="input">
@@ -38,7 +40,15 @@
           email: this.email,
           password: this.password,
         }
-        console.log(formData)
+        this.$store.dispatch('login', formData);
+      }
+    },
+    computed: {
+      signedIn(){
+        return this.$store.getters.signInSuccess;
+      },
+      signInError(){
+        return this.$store.getters.signInError;
       }
     }
   }
