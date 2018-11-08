@@ -35,6 +35,9 @@ export default new Vuex.Store({
       state.apiToken = null,
       state.user = null
     },
+    clearUserData(state){
+      state.rides = null
+    },
     addUserRides(state, payload){
       state.rides = payload
     }
@@ -75,6 +78,7 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit('clearAuthData');
+      commit('clearUserData');
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       router.replace('/')
