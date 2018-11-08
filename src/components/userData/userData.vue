@@ -2,8 +2,9 @@
   <div class="main container">
     <div class="header">
       <h4 id="heading">Rides this week:</h4>
-      <button @click="onAddRide" type="button" class="newRideBtn">Add Ride</button>
+      <button @click="onBtnClick" type="button" class="newRideBtn">{{ btnText }}</button>
     </div>
+    <RideForm v-show="clicked"></RideForm>
     <table class="table">
       <thead>
         <tr>
@@ -30,20 +31,35 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
+  import RideForm from '../forms/RideForm.vue'
 
   export default {
+    data(){
+      return {
+        clicked: false
+      }
+    },
     created() {
       this.$store.dispatch('fetchUserRides');
     },
     methods: {
       onAddRide(){
 
+      },
+      onBtnClick(){
+        this.clicked = !this.clicked
       }
     },
     computed: {
       ...mapGetters([
           'userRides'
-      ])
+      ]),
+      btnText(){
+        return this.clicked ? 'Cancel' : 'New ride'
+      }
+    },
+    components: {
+      RideForm
     }
   }
 </script>
