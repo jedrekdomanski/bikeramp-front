@@ -45,7 +45,7 @@
     },
     computed: {
       signedIn(){
-        return this.$store.getters.signInSuccess;
+        return this.$store.getters.signedIn;
       },
       signInError(){
         return this.$store.getters.signInError;
