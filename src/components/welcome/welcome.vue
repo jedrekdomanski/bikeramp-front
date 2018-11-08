@@ -8,7 +8,7 @@
         <router-link to="/signin">Sign In</router-link>
       </div>
     </div>
-    <userData></userData>
+    <userData v-if="signedIn"></userData>
   </div>
 </template>
 <script>
