@@ -58,7 +58,7 @@ export default new Vuex.Store({
           })
           localStorage.setItem('token', response.data.api_token)
           localStorage.setItem('user', response.data.user)
-          router.replace('/dashboard')
+          router.replace('/')
         })
         .catch(error => {
           commit('signInError')
