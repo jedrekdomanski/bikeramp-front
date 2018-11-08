@@ -32,11 +32,6 @@
   import { mapGetters } from 'vuex'
 
   export default {
-    data(){
-      return {
-        rides: null
-      }
-    },
     created() {
       this.$store.dispatch('fetchUserRides');
     },
