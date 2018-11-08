@@ -1,8 +1,8 @@
 <template>
   <div class="main container">
-    <div>
+    <div class="header">
       <h4 id="heading">Rides this week:</h4>
-      <button @click="onAddRide" type="button">Add Ride</button>
+      <button @click="onAddRide" type="button" class="newRideBtn">Add Ride</button>
     </div>
     <table class="table">
       <thead>
@@ -52,21 +52,34 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  .header {
+    height: 56px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+
   #heading {
     display: inline-block;
+    width: 200px;
+    margin-top: 10px;
     padding: 10px;
   }
 
-  button {
+  .newRideBtn {
     border: 1px solid #521751;
-    background: #521751;
-    color: white;
-    padding: 6px;
-    margin: 8px;
+    color: #521751;
+    padding: 10px 20px;
     font: inherit;
     cursor: pointer;
-    float: right;
-    border-radius: 4px;
+    border-radius: 3px;
+  }
+
+  .newRideBtn:hover {
+    background-color: #521751;
+    color: white;
   }
 </style>
