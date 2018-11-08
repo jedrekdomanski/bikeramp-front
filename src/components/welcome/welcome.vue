@@ -1,14 +1,30 @@
 <template>
-  <div id="welcome">
-    <h1>Time to learn something new!</h1>
-    <p>You found the best place to learn - and now you're just one sign in (or sign up) away from it!</p>
-    <div class="cta">
-      <router-link to="/signup">Sign Up</router-link>
-      <router-link to="/signin">Sign In</router-link>
+  <div>
+    <div v-if="!signedIn" id="welcome">
+      <h1>Time to learn something new!</h1>
+      <p>You found the best place to learn - and now you're just one sign in (or sign up) away from it!</p>
+      <div class="cta">
+        <router-link to="/signup">Sign Up</router-link>
+        <router-link to="/signin">Sign In</router-link>
+      </div>
     </div>
+    <userData></userData>
   </div>
 </template>
+<script>
+  import userData from '../userData/userData.vue'
 
+  export default {
+    computed: {
+      signedIn(){
+        return this.$store.getters.signedIn
+      }
+    },
+    components: {
+        userData
+      }
+  }
+</script>
 <style scoped>
   #welcome {
     width: 80%;

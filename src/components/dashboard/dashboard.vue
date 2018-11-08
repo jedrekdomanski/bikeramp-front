@@ -8,14 +8,6 @@
   import axios from 'axios';
 
   export default {
-    data() {
-      return {
-        rides: [],
-      };
-    },
-    created() {
-      this.$store.dispatch('fetchUserRides');
-    },
     computed: {
       notSignedIn(){
         return this.$store.getters.signInError;
