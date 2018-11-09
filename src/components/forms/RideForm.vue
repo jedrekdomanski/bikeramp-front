@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <p v-show="showErrorAlert" class="alert alert-danger">Invalid input data. Please try again.</p>
+  <div class="container padding">
+    <p v-show="showErrorAlert" class="alert alert-danger padding">Invalid input data. Please try again.</p>
     <form @submit.prevent="onSubmit" class="form-inline">
     <label class="sr-only" for="inlineFormInputName2">Start Address</label>
     <input 
@@ -68,5 +68,9 @@
 <style scoped>
   td input {
     width: 250px;
+  }
+
+  .padding {
+    margin-top: 10px;
   }
 </style>
