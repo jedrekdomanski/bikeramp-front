@@ -87,6 +87,7 @@
     font: inherit;
     cursor: pointer;
     border-radius: 3px;
+    width: 106px;
   }
 
   .newRideBtn:hover {
