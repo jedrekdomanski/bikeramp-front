@@ -1,7 +1,6 @@
 <template>
   <div id="signin">
-    <p v-if="signedIn" class="alert alert-success">You've successfully signed in</p>
-    <p v-if="signInError" class="alert alert-danger">Invalid email or password. Please try again.</p>
+    <p v-if="showErrorAlert" class="alert alert-danger">Invalid email or password. Please try again.</p>
     <div class="signin-form">
       <form @submit.prevent="onSubmit">
         <div class="input">
@@ -44,11 +43,8 @@
       }
     },
     computed: {
-      signedIn(){
-        return this.$store.getters.signedIn;
-      },
-      signInError(){
-        return this.$store.getters.signInError;
+      showErrorAlert(){
+        return this.$store.getters.showErrorAlert;
       }
     }
   }
