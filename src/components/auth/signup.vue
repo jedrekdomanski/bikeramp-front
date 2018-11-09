@@ -70,7 +70,6 @@
           password: this.password,
           password_confirmation: this.password_confirmation
         }
-        console.log(formData)
         this.$store.dispatch('signup', formData);
       }
     },
