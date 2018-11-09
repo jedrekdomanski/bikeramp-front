@@ -43,9 +43,6 @@
       this.$store.dispatch('fetchUserRides');
     },
     methods: {
-      onAddRide(){
-
-      },
       onBtnClick(){
         this.clicked = !this.clicked
       }
@@ -70,7 +67,7 @@
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 10 20px;
   }
 
   #heading {
