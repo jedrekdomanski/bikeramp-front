@@ -19,7 +19,8 @@
       v-model="destination_address">
     <label class="sr-only" for="inlineFormInputName2">Price</label>
     <input 
-      type="text" 
+      type="number"
+      step="any"
       class="form-control mb-5 mr-sm-5" 
       id="inlineFormInputName2" 
       placeholder="Price"
