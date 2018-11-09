@@ -7,39 +7,61 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    apiToken: null,
-    user: null,
-    rides: null,
-    signedUp: '',
-    signUpError: '',
-    signedIn: '',
-    signInError: ''
+    auth: {
+      apiToken: null,
+      user: null,
+      signedUp: '',
+      signUpError: '',
+      signedIn: '',
+      signInError: ''
+    },
+    data: {
+      rides: []
+    },
+    alerts: {
+      showErrorAlert: false
+    },
+    serverData: {
+      serverResponsError: false
+    }
   },
   mutations: {
     authenticateUser(state, payload) {
-      state.apiToken = payload.token
-      state.user = payload.user
-      state.signedIn = true
+      state.auth.apiToken = payload.token
+      state.auth.user = payload.user
+      state.auth.signedIn = true
 
     },
     signInError(state){
-      state.signInError = true;
+      state.auth.signInError = true;
     },
     signedUp(state){
-      state.signedUp = true;
+      state.auth.signedUp = true;
     },
     signUpError(state){
-      state.signUpError = true;
+      state.auth.signUpError = true;
     },
     clearAuthData(state){
-      state.apiToken = null,
-      state.user = null
+      state.auth.apiToken = null,
+      state.auth.user = null
     },
     clearUserData(state){
-      state.rides = null
+      state.data.rides = null
     },
-    addUserRides(state, payload){
-      state.rides = payload
+    fetchUserRides(state, payload){
+      state.data.rides = payload.data
+    },
+    addRide(state, ride){
+      state.data.rides.push(ride)
+    },
+    showErrorAlert(state){
+      state.alerts.showErrorAlert = true
+      setTimeout(() => {
+        state.alerts.showErrorAlert = false
+      }, 5000);
+    },
+    serverResponsError(state){
+      state.serverData.serverResponsError = true
     }
   },
   actions: {
@@ -70,10 +92,12 @@ export default new Vuex.Store({
     fetchUserRides({ commit }) {
       axios.get('/api/stats/current_week')
         .then(response => {
-          commit('addUserRides', response.data)
+          commit('fetchUserRides', response)
+
         })
         .catch(error => {
-          commit('signInError')
+          console.log(error)
+          commit('serverResponsError')
         })
     },
     logout({ commit }) {
@@ -93,29 +117,45 @@ export default new Vuex.Store({
         return
       }
       commit('authenticateUser', { token: token, user: user })
+    },
+    createRide({ commit }, ride){
+      axios.post('/api/trips', ride)
+        .then(response => {
+          commit('addRide', response.data)
+        })
+        .catch(error => {
+          commit('showErrorAlert')
+        })
     }
   },
   getters: {
     signedUp: state => {
-      return state.signedUp;
+      return state.auth.signedUp;
     },
     signUpError: state => {
-      return state.signUpError;
+      return state.auth.signUpError;
     },
     signedIn: state => {
-      return state.apiToken !== null;
+      return state.auth.apiToken !== null;
     },
     signInError: state => {
-      return state.signInError;
+      return state.auth.signInError;
     },
     current_user: state => {
-      return !state.user ? false : state.user.email;
+      return !state.auth.user ? false : state.auth.user.email;
     },
     userRides: state => {
-      return state.rides;
+      let rides = state.data.rides
+      rides.sort(( a, b) => {
+          return new Date(a.date) - new Date(b.date);
+        });
+      return rides
     },
     token: state => {
-      return state.apiToken;
+      return state.auth.apiToken;
+    },
+    showErrorAlert: state => {
+      return state.alerts.showErrorAlert;
     }
   }
 })
