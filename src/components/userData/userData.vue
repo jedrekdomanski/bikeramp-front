@@ -25,6 +25,14 @@
           <td>{{ ride.price }}</td>
           <td>{{ ride.date }}</td>
         </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><b>{{ weeklyTotals.total_distance }} km</b></td>
+          <td><b>{{ weeklyTotals.total_price }} PLN</b></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -49,7 +57,8 @@
     },
     computed: {
       ...mapGetters([
-          'userRides'
+          'userRides',
+          'weeklyTotals'
       ]),
       btnText(){
         return this.clicked ? 'Cancel' : 'New ride'

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from './router'
+import { map, sum, sumBy, orderBy } from 'lodash';
 
 Vue.use(Vuex)
 
@@ -12,8 +13,7 @@ export default new Vuex.Store({
       user: null,
       signedUp: '',
       signUpError: '',
-      signedIn: '',
-      signInError: ''
+      
     },
     data: {
       rides: []
@@ -46,10 +46,13 @@ export default new Vuex.Store({
       state.auth.user = null
     },
     clearUserData(state){
-      state.data.rides = null
+      state.data.rides = []
     },
     fetchUserRides(state, payload){
-      state.data.rides = payload.data
+      let rides = payload.data
+      rides.forEach((item) => {
+        state.data.rides.push(item)
+      })
     },
     addRide(state, ride){
       state.data.rides.push(ride)
@@ -58,7 +61,7 @@ export default new Vuex.Store({
       state.alerts.showErrorAlert = true
       setTimeout(() => {
         state.alerts.showErrorAlert = false
-      }, 5000);
+      }, 3000);
     },
     serverResponsError(state){
       state.serverData.serverResponsError = true
@@ -86,17 +89,15 @@ export default new Vuex.Store({
           router.replace('/')
         })
         .catch(error => {
-          commit('signInError')
+          commit('showErrorAlert')
         })
     },
     fetchUserRides({ commit }) {
       axios.get('/api/stats/current_week')
         .then(response => {
           commit('fetchUserRides', response)
-
         })
         .catch(error => {
-          console.log(error)
           commit('serverResponsError')
         })
     },
@@ -121,6 +122,7 @@ export default new Vuex.Store({
     createRide({ commit }, ride){
       axios.post('/api/trips', ride)
         .then(response => {
+          console.log(ride)
           commit('addRide', response.data)
         })
         .catch(error => {
@@ -138,24 +140,29 @@ export default new Vuex.Store({
     signedIn: state => {
       return state.auth.apiToken !== null;
     },
-    signInError: state => {
-      return state.auth.signInError;
-    },
     current_user: state => {
       return !state.auth.user ? false : state.auth.user.email;
     },
     userRides: state => {
       let rides = state.data.rides
-      rides.sort(( a, b) => {
-          return new Date(a.date) - new Date(b.date);
-        });
-      return rides
+      let sortedByDateArray = orderBy(rides, ['date'], ['asc'])
+      return sortedByDateArray
     },
     token: state => {
       return state.auth.apiToken;
     },
     showErrorAlert: state => {
       return state.alerts.showErrorAlert;
+    },
+    weeklyTotals: state => {
+      let rides = state.data.rides
+      let total_distance = sumBy(rides, 'distance')
+      let total_price = sumBy(rides, 'price')
+      
+      return { 
+        total_distance: total_distance,
+        total_price: total_price
+      }
     }
   }
 })
