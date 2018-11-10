@@ -1,7 +1,6 @@
 <template>
   <div id="dashboard">
     <h1>That's the dashboard!</h1>
-    <p v-if="notSignedIn" class="alert alert-warning">You should only get here if you're authenticated!</p>
   </div>
 </template>
 <script>
@@ -9,9 +8,7 @@
 
   export default {
     computed: {
-      notSignedIn(){
-        return this.$store.getters.signInError;
-      }
+      
     }
   }
 </script>
