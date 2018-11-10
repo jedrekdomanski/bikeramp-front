@@ -19,8 +19,8 @@ export default {
           user: response.data.user
         })
         localStorage.setItem('token', response.data.api_token)
-        localStorage.setItem('user', response.data.user)
-        router.replace('/')
+        localStorage.setItem('user', JSON.stringify(response.data.user))
+        router.push('/')
       })
       .catch(error => {
         commit('showErrorAlert')
@@ -51,12 +51,11 @@ export default {
     if (!user) {
       return
     }
-    commit('authenticateUser', { token: token, user: user })
+    commit('authenticateUser', { token: token, user: JSON.parse(user) })
   },
   createRide({ commit }, ride){
     axios.post('/api/trips', ride)
       .then(response => {
-        console.log(ride)
         commit('addRide', response.data)
       })
       .catch(error => {
