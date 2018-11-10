@@ -12,6 +12,9 @@
           <router-link to="/signin">Sign In</router-link>
         </li>
         <li v-if="auth">
+          <router-link to="/profile">{{ current_user }}</router-link>
+        </li>
+        <li v-if="auth">
           <router-link to="/dashboard">Dashboard</router-link>
         </li>
         <li v-if="auth">
@@ -26,6 +29,9 @@
     computed: {
       auth(){
         return this.$store.getters.signedIn
+      },
+      current_user(){
+        return this.$store.getters.current_user
       }
     },
     methods: {
