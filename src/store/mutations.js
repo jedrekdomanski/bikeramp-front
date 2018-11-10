@@ -21,10 +21,11 @@ export default {
     state.data.rides = []
   },
   fetchUserRides(state, payload){
-    let rides = payload.data
-    rides.forEach((item) => {
-      state.data.rides.push(item)
-    })
+    state.data.rides = payload.data
+    // let rides = payload.data
+    // rides.forEach((item) => {
+      
+    // })
   },
   addRide(state, ride){
     state.data.rides.push(ride)
