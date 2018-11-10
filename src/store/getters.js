@@ -11,12 +11,13 @@ export default {
     return state.auth.apiToken !== null;
   },
   current_user: state => {
-    return !state.auth.user ? false : state.auth.user.email;
+    let user = state.auth.user
+    return !state.auth.user ? false : user.email
   },
   userRides: state => {
     let rides = state.data.rides
-    let sortedByDateArray = orderBy(rides, ['date'], ['asc'])
-    return sortedByDateArray
+    let ridesSortedByDate = orderBy(rides, ['date'], ['asc'])
+    return ridesSortedByDate
   },
   token: state => {
     return state.auth.apiToken;
