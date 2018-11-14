@@ -58,6 +58,9 @@ export default {
       .then(response => {
         commit('addRide', response.data)
       })
+      .then(response => {
+        commit('showSuccessAlert')
+      })
       .catch(error => {
         commit('showErrorAlert')
       })

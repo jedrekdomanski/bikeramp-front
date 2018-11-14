@@ -25,6 +25,9 @@ export default {
   showErrorAlert: state => {
     return state.alerts.showErrorAlert;
   },
+  showSuccessAlert: state => {
+    return state.alerts.showSuccessAlert;
+  },
   weeklyTotals: state => {
     let rides = state.data.rides
     let total_distance = sumBy(rides, 'distance')

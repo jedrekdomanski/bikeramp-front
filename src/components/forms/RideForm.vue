@@ -1,6 +1,7 @@
 <template>
   <div class="container padding">
     <p v-show="showErrorAlert" class="alert alert-danger padding">Invalid input data. Please try again.</p>
+    <p v-show="showSuccessAlert" class="alert alert-success padding">Ride has been successfully created.</p>
     <form @submit.prevent="onSubmit" class="form-inline">
     <label class="sr-only" for="inlineFormInputName2">Start Address</label>
     <input 
@@ -61,7 +62,8 @@
     },
     computed: {
       ...mapGetters([
-          'showErrorAlert'
+          'showErrorAlert',
+          'showSuccessAlert'
       ])
     }
   }

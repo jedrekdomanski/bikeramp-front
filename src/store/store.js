@@ -19,7 +19,8 @@ export default new Vuex.Store({
       rides: []
     },
     alerts: {
-      showErrorAlert: false
+      showErrorAlert: false,
+      showSuccessAlert: false
     },
     serverData: {
       serverResponsError: false

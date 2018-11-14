@@ -22,10 +22,6 @@ export default {
   },
   fetchUserRides(state, payload){
     state.data.rides = payload.data
-    // let rides = payload.data
-    // rides.forEach((item) => {
-      
-    // })
   },
   addRide(state, ride){
     state.data.rides.push(ride)
@@ -34,6 +30,13 @@ export default {
     state.alerts.showErrorAlert = true
     setTimeout(() => {
       state.alerts.showErrorAlert = false
+    }, 3000);
+  },
+  showSuccessAlert(state){
+    state.alerts.showSuccessAlert = true
+    console.log(state.alerts.showSuccessAlert)
+    setTimeout(() => {
+      state.alerts.showSuccessAlert = false
     }, 3000);
   },
   serverResponsError(state){
