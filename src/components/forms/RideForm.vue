@@ -21,7 +21,7 @@
     <label class="sr-only" for="inlineFormInputName2">Price</label>
     <input 
       type="number"
-      step="any"
+      step="0.1"
       class="form-control mb-5 mr-sm-5" 
       id="inlineFormInputName2" 
       placeholder="Price"

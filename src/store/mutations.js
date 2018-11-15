@@ -26,6 +26,9 @@ export default {
   addRide(state, ride){
     state.data.rides.push(ride)
   },
+  deleteRide(state, index){
+    state.data.rides.splice(index, 1)
+  },
   showErrorAlert(state){
     state.alerts.showErrorAlert = true
     setTimeout(() => {
@@ -34,7 +37,6 @@ export default {
   },
   showSuccessAlert(state){
     state.alerts.showSuccessAlert = true
-    console.log(state.alerts.showSuccessAlert)
     setTimeout(() => {
       state.alerts.showSuccessAlert = false
     }, 3000);

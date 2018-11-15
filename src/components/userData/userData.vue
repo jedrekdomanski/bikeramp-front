@@ -17,13 +17,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(ride, index) in userRides">
-          <th scope="row">{{ index += 1 }}</th>
+        <tr v-for="(ride, index) in userRides" :key="ride.id">
+          <th scope="row">{{ index + 1 }}</th>
           <td>{{ ride.start_address }}</td>
           <td>{{ ride.destination_address }}</td>
           <td>{{ ride.distance }}</td>
           <td>{{ ride.price }}</td>
           <td>{{ ride.date }}</td>
+          <td>
+            <button @click="deleteRide(index, ride.id)" type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </td>
         </tr>
         <tr>
           <td></td>
@@ -53,6 +58,9 @@
     methods: {
       onBtnClick(){
         this.clicked = !this.clicked
+      },
+      deleteRide(index, id){
+        this.$store.dispatch('deleteRide', { index: index, id: id });
       }
     },
     computed: {
@@ -99,5 +107,9 @@
   .newRideBtn:hover {
     background-color: #521751;
     color: white;
+  }
+
+  .close span {
+    color: red;
   }
 </style>

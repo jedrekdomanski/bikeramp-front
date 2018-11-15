@@ -64,5 +64,14 @@ export default {
       .catch(error => {
         commit('showErrorAlert')
       })
+  },
+  deleteRide({ commit }, payload){
+    axios.delete('/api/trips/' + payload.id)
+      .then(response => {
+        commit('deleteRide', payload.index)
+      })
+      .catch(error => {
+        console.log('Do something ...')
+      })
   }
 }
