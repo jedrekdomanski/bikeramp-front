@@ -73,5 +73,14 @@ export default {
       .catch(error => {
         console.log('Do something ...')
       })
+  },
+  fetchMonthlyStats({ commit }){
+    axios.get('/api/stats/monthly')
+      .then(response => {
+        commit('fetchMonthlyStats', response.data)
+      })
+      .catch(error => {
+        console.log(error)
+    })
   }
 }
