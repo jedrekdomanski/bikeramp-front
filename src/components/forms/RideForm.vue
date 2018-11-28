@@ -25,7 +25,7 @@
       class="form-control mb-5 mr-sm-5" 
       id="inlineFormInputName2" 
       placeholder="Price"
-      v-model="price">
+      v-model="price_cents">
     <label class="sr-only" for="inlineFormInputName2">Date</label>
     <input 
       type="text" 
@@ -45,7 +45,7 @@
       return {
         start_address: '',
         destination_address: '',
-        price: '',
+        price_cents: '',
         date: ''
       }
     },
@@ -54,7 +54,7 @@
         const formData = {
           start_address: this.start_address,
           destination_address: this.destination_address,
-          price: this.price,
+          price_cents: this.price_cents,
           date: this.date
         }
         this.$store.dispatch('createRide', formData);
