@@ -43,5 +43,8 @@ export default {
   },
   serverResponsError(state){
     state.serverData.serverResponsError = true
+  },
+  fetchMonthlyStats(state, data){
+    state.data.monthly_stats = data
   }
 }
