@@ -1,21 +1,76 @@
 <template>
   <div id="dashboard">
     <div class="container chart">
-      <h2>Total price this year</h2>
-      <monthly-price-bar-chart/>
+      <monthly-price-chart v-if="loaded" :chartdata="chartdata" :options="options"/>
     </div>
   </div>
 </template>
 <script>
   import axios from 'axios';
-  import MonthlyPriceBarChart from './charts/MonthlyPriceBarChart'
+  import { map, forEach } from 'lodash'
+  import MonthlyPriceChart from './charts/MonthlyPriceChart'
 
   export default {
-    computed: {
-      
+    data(){
+      return {
+        chartdata: {
+          labels: [],
+          datasets: [
+            {
+              label: 'Total price (PLN)',
+              data: [],
+              backgroundColor: '#fa923f',
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Total price per month (PLN)',
+            fontSize: 25
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              gridLines: {
+                display: false,
+              }
+            }],
+            xAxes: [ {
+              barThickness: 6,
+              gridLines: {
+                display: false
+              }
+            }]
+          },
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        },
+        loaded: false
+      }
     },
     components: {
-      MonthlyPriceBarChart
+      MonthlyPriceChart
+    },
+    created() {
+      axios.get('/api/stats/monthly')
+        .then(response => {
+          let rides = response.data
+          forEach(rides, (ride) => {
+            this.chartdata.labels.push(ride.month)
+            this.chartdata.datasets[0].data.push(ride.total_price)
+          })
+          this.loaded = true
+        })
+        .catch(error => {
+          console.log(error)
+      })
     }
   }
 </script>
@@ -32,12 +87,5 @@
     border-radius: 15px;
     box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
     margin-top: 25px;
-  }
-
-  .chart h2 {
-    margin-top: 0;
-    padding: 15px 0;
-    color:  rgba(255, 0,0, 0.5);
-    text-align: center;
   }
 </style>
