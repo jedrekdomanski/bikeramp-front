@@ -64,4 +64,8 @@
     }
   }
 
+  .vdp-datepicker input {
+    border: 0px;
+  }
+
 </style>

@@ -3,22 +3,18 @@
     <p v-show="showErrorAlert" class="alert alert-danger padding">Invalid input data. Please try again.</p>
     <p v-show="showSuccessAlert" class="alert alert-success padding">Ride has been successfully created.</p>
     <form @submit.prevent="onSubmit" class="form-inline">
-    <label class="sr-only" for="inlineFormInputName2">Start Address</label>
     <input 
       type="text"
       class="form-control mb-5 mr-sm-5"
       id="inlineFormInputName2"
       placeholder="Start Address"
       v-model="start_address">
-
-    <label class="sr-only" for="inlineFormInputName2">Destination Address</label>
     <input 
       type="text" 
       class="form-control mb-5 mr-sm-5" 
       id="inlineFormInputName2" 
       placeholder="Destination Address"
       v-model="destination_address">
-    <label class="sr-only" for="inlineFormInputName2">Price</label>
     <input 
       type="number"
       step="0.1"
@@ -26,13 +22,11 @@
       id="inlineFormInputName2" 
       placeholder="Price"
       v-model="price_cents">
-    <label class="sr-only" for="inlineFormInputName2">Date</label>
-    <input 
-      type="text" 
+    <datepicker
       class="form-control mb-5 mr-sm-5" 
-      id="inlineFormInputName2" 
-      placeholder="Date"
-      v-model="date">
+      id="datepicker"
+      placeholder="Select a date"
+      v-model="date" />
   <button type="submit" class="btn btn-primary mb-5" id="loading" :disabled="loading">
     <div class="lds-ring" v-if="loading"><div></div><div></div><div></div><div></div></div>
     Submit
@@ -42,6 +36,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex'
+  import Datepicker from 'vuejs-datepicker'
 
   export default {
     data(){
@@ -72,6 +67,9 @@
           'showErrorAlert',
           'showSuccessAlert'
       ])
+    },
+    components: {
+      Datepicker
     }
   }
 </script>
