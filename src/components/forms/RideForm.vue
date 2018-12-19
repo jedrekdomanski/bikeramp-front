@@ -33,7 +33,10 @@
       id="inlineFormInputName2" 
       placeholder="Date"
       v-model="date">
-  <button type="submit" class="btn btn-primary mb-5">Submit</button>
+  <button type="submit" class="btn btn-primary mb-5" id="loading" :disabled="loading">
+    <div class="lds-ring" v-if="loading"><div></div><div></div><div></div><div></div></div>
+    Submit
+  </button>
 </form>
   </div>
 </template>
@@ -46,7 +49,8 @@
         start_address: '',
         destination_address: '',
         price_cents: '',
-        date: ''
+        date: '',
+        loading: false
       }
     },
     methods: {
@@ -57,7 +61,10 @@
           price_cents: this.price_cents,
           date: this.date
         }
-        this.$store.dispatch('createRide', formData);
+        this.loading = true
+        this.$store.dispatch('createRide', formData).then(() => {
+          this.loading = false
+        })
       }
     },
     computed: {
@@ -75,5 +82,10 @@
 
   .padding {
     margin-top: 10px;
+  }
+
+  #loading:disabled {
+    background-color: lighten(#007bff, 25%);
+    cursor: not-allowed;
   }
 </style>

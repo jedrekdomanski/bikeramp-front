@@ -24,7 +24,8 @@ export default new Vuex.Store({
     },
     serverData: {
       serverResponsError: false
-    }
+    },
+    loading: false
   },
   getters,
   mutations,

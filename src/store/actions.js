@@ -3,7 +3,7 @@ import router from '../router'
 
 export default {
   signup({ commit }, payload){
-    axios.post('/api/users', payload)
+    axios.post('/api/auth', payload)
       .then(response => {
         commit('signedUp')
       })
@@ -12,7 +12,7 @@ export default {
       })
   },
   login({ commit }, payload){
-    axios.post('/api/users/login', payload)
+    axios.post('/api/auth/login', payload)
       .then(response => {
         commit('authenticateUser', {
           token: response.data.api_token,
@@ -20,6 +20,7 @@ export default {
         })
         localStorage.setItem('token', response.data.api_token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
+        
         router.push('/')
       })
       .catch(error => {
@@ -53,8 +54,8 @@ export default {
     }
     commit('authenticateUser', { token: token, user: JSON.parse(user) })
   },
-  createRide({ commit }, ride){
-    axios.post('/api/trips', ride)
+  async createRide({ commit }, ride){
+    await axios.post('/api/trips', ride)
       .then(response => {
         commit('addRide', response.data)
       })

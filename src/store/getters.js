@@ -31,11 +31,14 @@ export default {
   weeklyTotals: state => {
     let rides = state.data.rides
     let total_distance = sumBy(rides, 'distance')
-    let total_price = sumBy(rides, 'price_cents')
+    let total_price = sumBy(rides, 'price')
     
     return { 
       total_distance: total_distance,
       total_price: total_price
     }
+  },
+  loading: state => {
+    return state.loading
   }
 };
