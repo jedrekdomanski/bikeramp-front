@@ -130,24 +130,6 @@
     font: inherit;
   }
 
-  .hobbies button {
-    border: 1px solid #521751;
-    background: #521751;
-    color: white;
-    padding: 6px;
-    font: inherit;
-    cursor: pointer;
-  }
-
-  .hobbies button:hover,
-  .hobbies button:active {
-    background-color: #8d4288;
-  }
-
-  .hobbies input {
-    width: 90%;
-  }
-
   .submit button {
     border: 1px solid #521751;
     color: #521751;
