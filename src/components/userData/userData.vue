@@ -22,7 +22,7 @@
           <td>{{ ride.start_address }}</td>
           <td>{{ ride.destination_address }}</td>
           <td>{{ ride.distance }}</td>
-          <td>{{ ride.price_cents }}</td>
+          <td>{{ ride.price }}</td>
           <td>{{ ride.date }}</td>
           <td>
             <button @click="deleteRide(index, ride.id)" type="button" class="close" aria-label="Close">
@@ -34,8 +34,8 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><b>{{ weeklyTotals.total_distance }} km</b></td>
-          <td><b>{{ weeklyTotals.total_price }} PLN</b></td>
+          <td><b>Total distance: {{ weeklyTotals.total_distance }} km</b></td>
+          <td><b>Total price: {{ weeklyTotals.total_price }} PLN</b></td>
           <td></td>
         </tr>
       </tbody>
