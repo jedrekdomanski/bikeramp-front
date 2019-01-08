@@ -46,5 +46,8 @@ export default {
   },
   fetchMonthlyStats(state, data){
     state.data.monthly_stats = data
+  },
+  saveUserProfile(state, payload){
+    state.auth.user = payload
   }
 }
