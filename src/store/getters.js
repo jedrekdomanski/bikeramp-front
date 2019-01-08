@@ -40,5 +40,8 @@ export default {
   },
   loading: state => {
     return state.loading
+  },
+  userProfile: state => {
+    return state.auth.user
   }
 };
