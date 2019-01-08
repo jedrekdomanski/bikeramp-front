@@ -83,5 +83,16 @@ export default {
       .catch(error => {
         console.log(error)
     })
+  },
+  saveUserProfile({ commit }, payload){
+    axios.patch('/api/users/' + payload.get('id'), payload)
+      .then(response => {
+        commit('saveUserProfile', response.data)
+        router.push('/profile/edit')
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(response)
+      })
   }
 }
