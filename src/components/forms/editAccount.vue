@@ -1,9 +1,6 @@
 <template>
-  <div id="signup">
-    <p v-if="accountUpdated" class="alert alert-success">Your account has been updated</p>
-    <p v-if="accountUpdateError" class="alert alert-danger">Ooops, something went wrong. Make sure to submit the form correctly.</p>
-    
-    <div class="signup-form">
+  <div id="account">   
+    <div class="account-form">
       <form @submit.prevent="onSubmit">
         <div class="input">
           <label for="first_name">First name</label>
@@ -60,10 +57,12 @@
           <input
                   type="file"
                   id="avatar"
-                  v-on:change="accountInfo.avatar">
+                  @change="onFileSelected">
         </div>
         <div class="submit">
-          <button type="submit">Submit</button>
+          <button type="submit">
+            <div class="lds-ring" v-if="loading"><div></div><div></div><div></div><div></div></div>
+          Submit</button>
         </div>
       </form>
     </div>
@@ -88,36 +87,35 @@
           twitterUrl: this.profile.twitter_url,
           linkedInUrl: this.profile.linked_in_url,
           hourlyRate: this.profile.hourly_rate,
-          avatar: ''
-        }
+          avatar: this.profile.avatar,
+          id: this.profile.id
+        },
+        loading: false
       };
     },
     methods: {
       onSubmit(){
-        const formData = {
-          first_name: this.profile.first_name,
-          last_name: this.profile.last_name,
-          phone_number: this.profile.phone_number,
-          facebook_url: this.profile.facebook_url,
-          twitter_url: this.profile.twitter_url,
-          linked_in_url: this.profile.linked_in_url,
-          hourly_rate: this.profile.hourly_rate,
-          avatar: ''
-        }
-        this.loading = true
-        this.$store.dispatch('saveUserProfile', formData).then(() => {
-          this.loading = false
-        })
+        const form = new FormData()
+        form.append('first_name', this.accountInfo.firstName)
+        form.append('last_name', this.accountInfo.lastName)
+        form.append('phone_number', this.accountInfo.phoneNumber)
+        form.append('facebook_url', this.accountInfo.facebookUrl)
+        form.append('twitter_url', this.accountInfo.twitterUrl)
+        form.append('linked_in_url', this.accountInfo.linkedInUrl)
+        form.append('hourly_rate', this.accountInfo.hourlyRate)
+        form.append('avatar', this.accountInfo.avatar, this.accountInfo.avatar.name)
+        form.append('id', this.accountInfo.id)
+        
+        this.$store.dispatch('saveUserProfile', form)
       },
-      accountUpdated(){
-      },
-      accountUpdateError(){
+      onFileSelected(event){
+        this.accountInfo.avatar = event.target.files[0]
       }
     }
   }
 </script>
 <style scoped>
-  .signup-form {
+  .account-form {
     width: 400px;
     margin: 30px auto;
     border: 1px solid #eee;
