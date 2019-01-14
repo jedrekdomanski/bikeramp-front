@@ -9,48 +9,59 @@ import UserForm from './components/forms/userForm.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  { path: '/', component: WelcomePage },
-  { path: '/signup', component: SignupPage , beforeEnter(to, from, next){
-      if (localStorage.token){
-        next('/')
-      } else {
-        next()
+export default new VueRouter({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: WelcomePage,
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: SignupPage, beforeEnter(to, from, next){
+        if (localStorage.token){
+          next('/')
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/signin', 
+      name: 'Signin', 
+      component: SigninPage, beforeEnter(to, from, next){
+        if (localStorage.token){
+          next('/')
+        } else {
+          next()
+        }
+      }
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: DashboardPage,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'UserProfile',
+      component: User,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile/edit',
+      name: 'EditUserProfile', 
+      component: UserForm,
+      meta: {
+        requiresAuth: true
       }
     }
-  },
-  { path: '/signin', component: SigninPage, beforeEnter(to, from, next){
-      if (localStorage.token){
-        next('/')
-      } else {
-        next()
-      }
-    }
-  },
-  { path: '/dashboard', component: DashboardPage, beforeEnter(to, from, next) {
-      if (localStorage.token){
-        next()
-      } else {
-        next('/signin')
-      }
-    }
-  },
-  { path: '/profile', component: User, beforeEnter(to, from, next){
-      if (localStorage.token){
-        next()
-      } else {
-        next('/signin')
-      }
-    }
-  },
-  { path: '/profile/edit', component: UserForm, beforeEnter(to, from, next){
-      if (localStorage.token){
-        next()
-      } else {
-        next('/signin')
-      }
-    }
-  }
-]
-
-export default new VueRouter({mode: 'history', routes})
+  ]
+});
