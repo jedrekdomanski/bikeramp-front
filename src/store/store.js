@@ -10,7 +10,6 @@ export default new Vuex.Store({
   state: {
     auth: {
       apiToken: null,
-      user: {},
       signedUp: '',
       signUpError: '',
       
