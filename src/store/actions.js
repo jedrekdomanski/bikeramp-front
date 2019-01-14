@@ -14,13 +14,8 @@ export default {
   login({ commit }, payload){
     axios.post('/api/auth/login', payload)
       .then(response => {
-        commit('authenticateUser', {
-          token: response.data.api_token,
-          user: response.data.user
-        })
-        localStorage.setItem('token', response.data.api_token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
-        
+        commit('authenticateUser', response.data)
+        localStorage.setItem('token', response.data)
         router.push('/')
       })
       .catch(error => {
@@ -40,7 +35,6 @@ export default {
     commit('clearAuthData');
     commit('clearUserData');
     localStorage.removeItem('token')
-    localStorage.removeItem('user')
     router.replace('/')
   },
   tryAutoLogin({ commit }){
@@ -48,11 +42,7 @@ export default {
     if (!token){
       return
     }
-    const user = localStorage.getItem('user')
-    if (!user) {
-      return
-    }
-    commit('authenticateUser', { token: token, user: JSON.parse(user) })
+    commit('authenticateUser', token)
   },
   async createRide({ commit }, ride){
     await axios.post('/api/trips', ride)
@@ -89,10 +79,8 @@ export default {
       .then(response => {
         commit('saveUserProfile', response.data)
         router.push('/profile/edit')
-        console.log(response)
       })
       .catch(error => {
-        console.log(response)
       })
   }
 }

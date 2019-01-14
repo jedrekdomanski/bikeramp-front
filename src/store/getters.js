@@ -10,10 +10,6 @@ export default {
   signedIn: state => {
     return state.auth.apiToken !== null;
   },
-  current_user: state => {
-    let user = state.auth.user
-    return !state.auth.user ? false : user.email
-  },
   userRides: state => {
     let rides = state.data.rides
     let ridesSortedByDate = orderBy(rides, ['date'], ['asc'])
@@ -40,8 +36,5 @@ export default {
   },
   loading: state => {
     return state.loading
-  },
-  userProfile: state => {
-    return state.auth.user
   }
 };

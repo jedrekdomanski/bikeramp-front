@@ -1,7 +1,6 @@
 export default {
   authenticateUser(state, payload) {
-    state.auth.apiToken = payload.token
-    state.auth.user = payload.user
+    state.auth.apiToken = payload
     state.auth.signedIn = true
   },
   signInError(state){
@@ -46,8 +45,5 @@ export default {
   },
   fetchMonthlyStats(state, data){
     state.data.monthly_stats = data
-  },
-  saveUserProfile(state, payload){
-    state.auth.user = payload
   }
 }
