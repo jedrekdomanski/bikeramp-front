@@ -1,0 +1,47 @@
+<div id="signup">
+  <p v-if="signedUp" class="alert alert-success">Your account has been created. To continue, please confirm your account by following the instruction in the email we've just sent you.</p>
+  <p v-if="signUpError" class="alert alert-danger">Ooops, something went wrong. Make sure to submit the form correctly.</p>
+  
+  <div class="signup-form">
+    <form @submit.prevent="onSubmit">
+      <div class="input">
+        <label for="email">Email</label>
+        <input
+                type="email"
+                id="email"
+                v-model="email">
+      </div>
+      <div class="input">
+        <label for="first_name">First name</label>
+        <input
+                type="text"
+                id="first_name"
+                v-model="first_name">
+      </div>
+      <div class="input">
+        <label for="last_name">Last name</label>
+        <input
+                type="text"
+                id="last_name"
+                v-model="last_name">
+      </div>
+      <div class="input">
+        <label for="password">Password</label>
+        <input
+                type="password"
+                id="password"
+                v-model="password">
+      </div>
+      <div class="input">
+        <label for="confirm-password">Confirm Password</label>
+        <input
+                type="password"
+                id="confirm-password"
+                v-model="password_confirmation">
+      </div>
+      <div class="submit">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
