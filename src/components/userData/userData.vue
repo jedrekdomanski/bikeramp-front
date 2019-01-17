@@ -1,47 +1,4 @@
-<template>
-  <div class="main container">
-    <div class="header">
-      <h4 id="heading">Rides this week:</h4>
-      <button @click="onBtnClick" type="button" class="newRideBtn">{{ btnText }}</button>
-    </div>
-    <RideForm v-show="clicked"></RideForm>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Start address</th>
-          <th scope="col">Destination address</th>
-          <th scope="col">Distance</th>
-          <th scope="col">Price</th>
-          <th scope="col">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(ride, index) in userRides" :key="ride.id">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ ride.start_address }}</td>
-          <td>{{ ride.destination_address }}</td>
-          <td>{{ ride.distance }}</td>
-          <td>{{ ride.price }}</td>
-          <td>{{ ride.date }}</td>
-          <td>
-            <button @click="deleteRide(index, ride.id)" type="button" class="close" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><b>Total distance: {{ weeklyTotals.total_distance }} km</b></td>
-          <td><b>Total price: {{ weeklyTotals.total_price }} PLN</b></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template>
+<template src="./userData.html"></template>
 <script>
   import { mapGetters } from 'vuex'
   import RideForm from '../forms/RideForm.vue'
@@ -56,7 +13,7 @@
       this.$store.dispatch('fetchUserRides');
     },
     methods: {
-      onBtnClick(){
+      toggleButton(){
         this.clicked = !this.clicked
       },
       deleteRide(index, id){
