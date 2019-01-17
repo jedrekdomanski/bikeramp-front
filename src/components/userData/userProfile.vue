@@ -1,129 +1,34 @@
-<template>
-  <div class="container emp-profile">
-    <form method="post">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="profile-img">
-            <img :src="current_user.avatar.url" alt=""/>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="profile-head">
-            <h5>{{current_user.first_name + ' ' + current_user.last_name}}</h5>
-            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <router-link to="/profile/edit" class="btn btn-primary">Edit Profile</router-link>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="profile-work">
-            <p>SOCIAL LINKS</p>
-            <a :href="current_user.facebook_url"><i class="fab fa-facebook fa-2x"></i></a><br/>
-            <a :href="current_user.twitter_url"><i class="fab fa-twitter fa-2x"></i></a><br/>
-            <a :href="current_user.linked_in_url"><i class="fab fa-linkedin-in fa-2x"></i></a>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="tab-content profile-tab" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <div class="row">
-                <div class="col-md-6">
-                    <label>User Id</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.username}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <label>Name</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.first_name + ' ' + current_user.last_name}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <label>Email</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.email}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <label>Phone</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.phone_number}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>English Level</label>
-                </div>
-                <div class="col-md-6">
-                    <p>Expert</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <label>Hourly Rate</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.hourly_rate}}</p>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Joined</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.created_at}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Total Rides</label>
-                </div>
-                <div class="col-md-6">
-                    <p>{{current_user.rides_count}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <label>Availability</label>
-                </div>
-                <div class="col-md-6">
-                  <p>6 months</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>           
-  </div>
-</template>
+<template src='./userProfile.html'></template>
 <script>
+  import UserService from '../../services/user.service'
+  
+  let userService;
+
   export default {
-    computed: {
-      current_user(){
-        return this.$store.state.auth.user;
+    data(){
+      return {
+        currentUser: {
+          username: '',
+          email: '',
+          phoneNumber: '',
+          firstName: '',
+          lastName: '',
+          hourlyRate: '',
+          joined: '',
+          twitterUrl: '',
+          facebookUrl: '',
+          linkedInUrl: '',
+          ridesCount: null,
+          avatar: {}
+        }
       }
+    },
+    created(){      
+      userService = new UserService('users');
+      userService.fetchCurrentUser()
+        .then(response => {
+            this.currentUser = Object.assign({}, response)
+        });
     }
   }
 </script>
