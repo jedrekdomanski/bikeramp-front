@@ -14,8 +14,9 @@ export default {
   login({ commit }, payload){
     axios.post('/api/auth/login', payload)
       .then(response => {
-        commit('authenticateUser', response.data)
-        localStorage.setItem('token', response.data)
+        commit('authenticateUser', response.data.api_token)
+        localStorage.setItem('token', response.data.api_token)
+        localStorage.setItem('user', JSON.stringify(response.data.user))
         router.push('/')
       })
       .catch(error => {
@@ -35,6 +36,7 @@ export default {
     commit('clearAuthData');
     commit('clearUserData');
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     router.replace('/')
   },
   tryAutoLogin({ commit }){
