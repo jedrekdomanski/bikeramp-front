@@ -1,39 +1,4 @@
-<template>
-  <div class="container padding">
-    <p v-show="showErrorAlert" class="alert alert-danger padding">Invalid input data. Please try again.</p>
-    <p v-show="showSuccessAlert" class="alert alert-success padding">Ride has been successfully created.</p>
-    <form @submit.prevent="onSubmit" class="form-inline">
-    <input 
-      type="text"
-      class="form-control mb-5 mr-sm-5"
-      id="inlineFormInputName2"
-      placeholder="Start Address"
-      v-model="start_address">
-    <input 
-      type="text" 
-      class="form-control mb-5 mr-sm-5" 
-      id="inlineFormInputName2" 
-      placeholder="Destination Address"
-      v-model="destination_address">
-    <input 
-      type="number"
-      step="0.1"
-      class="form-control mb-5 mr-sm-5" 
-      id="inlineFormInputName2" 
-      placeholder="Price"
-      v-model="price_cents">
-    <datepicker
-      class="form-control mb-5 mr-sm-5" 
-      id="datepicker"
-      placeholder="Select a date"
-      v-model="date" />
-  <button type="submit" class="btn btn-primary mb-5" id="loading" :disabled="loading">
-    <div class="lds-ring" v-if="loading"><div></div><div></div><div></div><div></div></div>
-    Submit
-  </button>
-</form>
-  </div>
-</template>
+<template src="./RideForm.html"></template>
 <script>
   import { mapGetters } from 'vuex'
   import Datepicker from 'vuejs-datepicker'
