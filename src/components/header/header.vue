@@ -5,20 +5,20 @@
     </div>
     <nav>
       <ul>
-        <li v-if="!auth">
+        <li v-if="!authenticated">
           <router-link to="/signup">Sign Up</router-link>
         </li>
-        <li v-if="!auth">
+        <li v-if="!authenticated">
           <router-link to="/signin">Sign In</router-link>
         </li>
-        <li v-if="auth">
-          <router-link to="/profile">{{ current_user }}</router-link>
+        <li v-if="authenticated">
+          <router-link to="/profile">Ikonka</router-link>
         </li>
-        <li v-if="auth">
+        <li v-if="authenticated">
           <router-link to="/dashboard">Dashboard</router-link>
         </li>
-        <li v-if="auth">
-          <button @click="onLogout" class="logout">Logout</button>
+        <li v-if="authenticated">
+          <button @click="logout" class="logout">Logout</button>
         </li>
       </ul>
     </nav>
@@ -27,15 +27,12 @@
 <script>
   export default {
     computed: {
-      auth(){
+      authenticated(){
         return this.$store.getters.signedIn
-      },
-      current_user(){
-        return this.$store.getters.current_user
       }
     },
     methods: {
-      onLogout(){
+      logout(){
         this.$store.dispatch('logout');
       }
     }
