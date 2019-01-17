@@ -17,9 +17,9 @@ router.beforeEach(
   (to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
       if (!Vue.auth.isAuthenticated()) {
-          next({
-              path: '/signin',
-          });
+        next({
+          path: '/signin',
+        });
       }
     }
 
@@ -33,3 +33,13 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+window.eventHub = new Vue();
+
+window.flash = function (message, type = 'success', stack = []) {
+  eventHub.$emit('push-error', message, type, stack);
+};
+
+window.flashError = function (message, stack = []) {
+  flash(message, 'danger', stack);
+};
