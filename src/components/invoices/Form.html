@@ -1,0 +1,80 @@
+<div class="container">
+  <!-- <div class="content"> -->
+    <div class="content-box">
+      <form @submit.prevent="submitInvoice">
+        <header><h3>Invoice {{ invoice.number }}</h3></header>
+        <div class="row invoice-section">
+          <div class="form-group row">
+            <label for="saleDate" class="col-sm-2 col-form-label pop-label">Issue date</label>
+            <div class="col-sm-10">
+              <datepicker v-model="invoice.creation_date" format="YYYY MM DD" lang="en"></datepicker>
+            </div>
+            <label for="saleDate" class="col-sm-2 col-form-label pop-label">Sale date</label>
+            <div class="col-sm-10">
+              <datepicker v-model="invoice.sale_date" format="YYYY MM DD" lang="en"></datepicker>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  <!-- </div> -->
+</div>
+
+<!-- <div class="row clearfix">
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover" id="tab_logic">
+        <thead>
+          <tr>
+            <th class="text-xs-center"> # </th>
+            <th class="text-xs-center"> Product </th>
+            <th class="text-xs-center"> Qty </th>
+            <th class="text-xs-center"> Price </th>
+            <th class="text-xs-center"> Total </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id='addr0'>
+            <td>1</td>
+            <td><input type="text" name='product[]'  placeholder='Enter Product Name' class="form-control"/></td>
+            <td><input type="number" name='qty[]' placeholder='Enter Qty' class="form-control qty" step="0" min="0"/></td>
+            <td><input type="number" name='price[]' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0"/></td>
+            <td><input type="number" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
+          </tr>
+          <tr id='addr1'></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="col-md-12">
+      <button id="add_row" class="btn btn-secondary float-xs-left">Add Row</button>
+      <button id='delete_row' class="float-xs-right btn btn-secondary">Delete Row</button>
+    </div>
+  </div>
+  <div class="row clearfix" style="margin-top:20px">
+    <div class="float-xs-right col-md-4">
+      <table class="table table-bordered table-hover" id="tab_logic_total">
+        <tbody>
+          <tr>
+            <th class="text-xs-center">Sub Total</th>
+            <td class="text-xs-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly/></td>
+          </tr>
+          <tr>
+            <th class="text-xs-center">Tax</th>
+            <td class="text-xs-center"><div class="input-group mb-2 mb-sm-0">
+                <input type="number" class="form-control" id="tax" placeholder="0">
+                <div class="input-group-addon">%</div>
+              </div></td>
+          </tr>
+          <tr>
+            <th class="text-xs-center">Tax Amount</th>
+            <td class="text-xs-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly/></td>
+          </tr>
+          <tr>
+            <th class="text-xs-center">Grand Total</th>
+            <td class="text-xs-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->

@@ -1,4 +1,4 @@
-<template src='./userProfile.html'></template>
+<template src='./Show.html'></template>
 <script>
   import UserService from '../../services/user.service'
   
@@ -23,12 +23,12 @@
         }
       }
     },
-    created(){      
-      userService = new UserService('users');
+    created(){
+      userService = new UserService();
       userService.fetchCurrentUser()
         .then(response => {
-            this.currentUser = Object.assign({}, response)
-        });
+          this.currentUser = Object.assign({}, response)
+        })
     }
   }
 </script>

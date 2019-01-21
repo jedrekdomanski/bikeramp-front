@@ -1,19 +1,19 @@
-<template>
-  <div id="app">
-    <app-header />
-    <router-view></router-view>
-  </div>
-</template>
-
+<template src='./App.html'></template>
 <script>
-  import Header from './components/header/header.vue'
   export default {
     name: 'app',
-    components: {
-      'app-header': Header
-    },
     created(){
       this.$store.dispatch('tryAutoLogin')
+    },
+    computed: {
+      authenticated(){
+        return this.$store.getters.signedIn
+      }
+    },
+    methods: {
+      logout(){
+        this.$store.dispatch('logout');
+      }
     }
   }
 </script>
@@ -66,6 +66,64 @@
 
   .vdp-datepicker input {
     border: 0px;
+  }
+
+  #header {
+    height: 56px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #521751;
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-weight: bold;
+    color: white;
+  }
+
+  .logo a {
+    text-decoration: none;
+    color: white;
+  }
+
+  nav {
+    height: 100%;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  li {
+    margin: 0 16px;
+  }
+
+  li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  li a:hover,
+  li a:active,
+  li a.router-link-active,
+  .logout:hover {
+    color: #fa923f;
+  }
+
+  .logout {
+    background-color: transparent;
+    border: none;
+    font: inherit;
+    color: white;
+    cursor: pointer
   }
 
 </style>

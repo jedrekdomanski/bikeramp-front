@@ -1,4 +1,4 @@
-<template src="./RideForm.html"></template>
+<template src="./Form.html"></template>
 <script>
   import { mapGetters } from 'vuex'
   import Datepicker from 'vuejs-datepicker'

@@ -1,0 +1,66 @@
+<div id="account">   
+  <div class="account-form">
+    <form @submit.prevent="onSubmit">
+      <div class="input">
+        <label for="first_name">First name</label>
+        <input
+                type="text"
+                id="first_name"
+                v-model="accountInfo.firstName">
+      </div>
+      <div class="input">
+        <label for="last_name">Last name</label>
+        <input
+                type="text"
+                id="last_name"
+                v-model="accountInfo.lastName">
+      </div>
+      <div class="input">
+        <label for="phone_number">Phone Number</label>
+        <input
+                type="text"
+                id="phone_number"
+                v-model="accountInfo.phoneNumber">
+      </div>
+      <div class="input">
+        <label for="facebook_url">Facebook URL</label>
+        <input
+                type="text"
+                id="facebook_url"
+                v-model="accountInfo.facebookUrl">
+      </div>
+      <div class="input">
+        <label for="twitter_url">Twitter URL</label>
+        <input
+                type="text"
+                id="twitter_url"
+                v-model="accountInfo.twitterUrl">
+      </div>
+      <div class="input">
+        <label for="linked_in_url">LinkedIn URL</label>
+        <input
+                type="text"
+                id="linked_in_url"
+                v-model="accountInfo.linkedInUrl">
+      </div>
+      <div class="input">
+        <label for="hourly_rate">Hourly Rate</label>
+        <input
+                type="text"
+                id="hourly_rate"
+                value="current_user.hourly_rate"
+                v-model="accountInfo.hourlyRate">
+      </div>
+      <div class="input">
+        <label for="avatar">Avatar</label>
+        <input
+                type="file"
+                id="avatar"
+                @change="onFileSelected">
+      </div>
+      <div class="submit">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

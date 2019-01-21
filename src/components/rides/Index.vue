@@ -1,7 +1,7 @@
-<template src="./userData.html"></template>
+<template src="./Index.html"></template>
 <script>
   import { mapGetters } from 'vuex'
-  import RideForm from '../forms/RideForm.vue'
+  import RideForm from './New.vue'
 
   export default {
     data(){

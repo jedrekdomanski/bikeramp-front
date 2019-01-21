@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <router-link to="/profile/edit" class="btn btn-primary">Edit Profile</router-link>
+        <router-link :to="{ name: 'editUserProfile', params: { username: currentUser.username }}" class="btn btn-primary">Edit Profile</router-link>
       </div>
     </div>
     <div class="row">

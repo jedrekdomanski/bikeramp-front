@@ -4,15 +4,15 @@
       <h1>Ride tracking made simple</h1>
       <p>Know exactly how much you earn and how far you ride</p>
       <div class="cta">
-        <router-link to="/signup">Sign Up</router-link>
-        <router-link to="/signin">Sign In</router-link>
+        <router-link :to="{ name: 'signup' }">Sign Up</router-link>
+        <router-link :to="{ name: 'signin' }">Sign In</router-link>
       </div>
     </div>
-    <userData v-if="signedIn"></userData>
+    <Ride v-if="signedIn"></Ride>
   </div>
 </template>
 <script>
-  import userData from '../userData/userData.vue'
+  import Ride from './rides/Index.vue'
 
   export default {
     computed: {
@@ -20,9 +20,7 @@
         return this.$store.getters.signedIn
       }
     },
-    components: {
-        userData
-      }
+    components: { Ride }
   }
 </script>
 <style scoped>

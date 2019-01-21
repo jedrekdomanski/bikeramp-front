@@ -1,0 +1,27 @@
+<div id="app">
+  <header id="header">
+    <div class="logo">
+      <router-link to="/">Bikeramp</router-link>
+    </div>
+    <nav>
+      <ul>
+        <li v-if="!authenticated">
+          <router-link to="/signup">Sign Up</router-link>
+        </li>
+        <li v-if="!authenticated">
+          <router-link to="/signin">Sign In</router-link>
+        </li>
+        <li v-if="authenticated">
+          <router-link to="/profile">Ikonka</router-link>
+        </li>
+        <li v-if="authenticated">
+          <router-link to="/dashboard">Dashboard</router-link>
+        </li>
+        <li v-if="authenticated">
+          <button @click="logout" class="logout">Logout</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <router-view></router-view>
+</div>
