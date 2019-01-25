@@ -13,7 +13,7 @@
           email: this.email,
           password: this.password,
         }
-        this.$store.dispatch('login', formData);
+        this.$store.dispatch('auth/login', formData);
       }
     },
     computed: {
