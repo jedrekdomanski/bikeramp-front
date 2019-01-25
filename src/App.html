@@ -1,24 +1,24 @@
 <div id="app">
   <header id="header">
     <div class="logo">
-      <router-link to="/">Bikeramp</router-link>
+      <router-link :to="{ name: 'home' }">Bikeramp</router-link>
     </div>
     <nav>
       <ul>
         <li v-if="!authenticated">
-          <router-link to="/signup">Sign Up</router-link>
+          <router-link :to="{ name: 'signup' }">Sign Up</router-link>
         </li>
         <li v-if="!authenticated">
-          <router-link to="/signin">Sign In</router-link>
+          <router-link :to="{ name: 'signin' }">Sign In</router-link>
         </li>
         <li v-if="authenticated">
-          <router-link to="/profile">Ikonka</router-link>
+          <router-link :to="{ name: 'userProfile' }"><font-awesome-icon icon="user" size="lg" /></router-link>
         </li>
         <li v-if="authenticated">
-          <router-link to="/dashboard">Dashboard</router-link>
+          <router-link :to="{ name: 'dashboard' }"><font-awesome-icon icon="chart-line" size="lg"/></router-link>
         </li>
         <li v-if="authenticated">
-          <button @click="logout" class="logout">Logout</button>
+          <button @click="logout" class="logout"><font-awesome-icon icon="sign-out-alt" size="lg"/></button>
         </li>
       </ul>
     </nav>
