@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="content-box">
+    <form @submit.prevent="submitInvoice">
+      <header><h3>Invoice {{ invoice.number }}</h3></header>
+      <div class="row mb-4" style="margin-top: 30px;">
+        <div class="col-sm-5">
+          <div class="form-group row">
+            <label for="issueDate" class="col-sm-4 col-form-label pop-label">Issue date</label>
+            <div class="col-sm-8">
+              <datepicker v-model="invoice.creation_date" format="DD-MM-YYYY" lang="en"></datepicker>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="saleDate" class="col-sm-4 col-form-label pop-label">Sale date</label>
+            <div class="col-sm-8">
+              <datepicker v-model="invoice.sale_date" format="DD-MM-YYYY" lang="en"></datepicker>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="dueDate" class="col-sm-4 col-form-label pop-label">Due date</label>
+            <div class="col-sm-8">
+              <datepicker v-model="invoice.due_date" format="DD-MM-YYYY" lang="en"></datepicker>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label for="currency" class="col-sm-2 col-form-label pop-label">Currency</label>
+            <div class="col-sm-4">
+              <select id="currencyField" name="currency" v-model="invoice.currency" class="form-control">
+                <option value="">Choose...</option>
+                <option v-for="(currency, key) in currencies" :value="currency" :key="key">
+                    {{ currencies[key] }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="payment_method" class="col-sm-2 col-form-label pop-label">Payment method</label>
+            <div class="col-sm-4">
+              <select id="paymentMethodField" name="payment_method" v-model="invoice.payment_method" class="form-control">
+                <option value="">Choose...</option>
+                <option v-for="(method, key) in paymentMethods" :value="method" :key="key">
+                    {{ method }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-lg-12">
+          <table class="table table-bordered table-hover" id="tab_logic">
+            <thead>
+              <tr>
+                <th class="text-center">Name</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Net Price</th>
+                <th class="text-center">Net Value</th>
+                <th class="text-center">VAT</th>
+                <th class="text-center">Gross value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(lineItem, index) in invoice.invoice_line_items" :key="index">
+                <td>
+                  <input 
+                        type="text"
+                        name="name"
+                        class="form-control text-left"
+                        v-model="lineItem.name">
+                </td>
+                <td>
+                  <input
+                        type="text"
+                        name="quantity"
+                        placeholder="Enter Quantity"
+                        class="form-control text-right"
+                        step="0" min="0"
+                        v-model.number="lineItem.quantity"
+                        @change="calcNetAndGrossAmounts(index)">
+                </td>
+                <td>
+                  <input
+                        type="text"
+                        name="price_net"
+                        placeholder="Enter Sale Price"
+                        class="form-control text-right"
+                        step="0.00" min="0"
+                        v-model.number="lineItem.price_net_cents"
+                        @change="calcNetAndGrossAmounts(index)">
+                </td>
+                <td>
+                  <input
+                        type="text"
+                        name="net_amount"
+                        placeholder="Enter Net Amount"
+                        class="form-control text-right"
+                        step="0.00" min="0"
+                        v-model.number="lineItem.net_amount_cents">
+                </td>
+                <td>
+                  <input
+                        type="text"
+                        name="vat"
+                        placeholder="Enter VAT"
+                        class="form-control text-right"
+                        step="0.00" min="0"
+                        v-model.number="lineItem.vat"
+                        @change=calcVAT(index)>
+                </td>
+                <td>
+                  <input
+                        type="text"
+                        name="gross_amount"
+                        placeholder="Enter Gross Amount"
+                        class="form-control text-right"
+                        step="0.00" min="0"
+                        v-model.number="lineItem.gross_amount_cents">
+                </td>
+              </tr>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-lg-12" style="margin-bottom: 20px;">
+          <button id="add_row" class="btn btn-secondary float-left" @click.prevent="addLineItem">Add Row</button>
+          <button id="delete_row" class="float-right btn btn-secondary" @click.prevent="">Delete Row</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-5"></div>
+        <div class="col-lg-4 col-sm-5 ml-auto">
+          <table class="table table-clear">
+            <tbody>
+              <tr>
+                <td class="left"><strong>Total:</strong></td>
+                <td class="right"><strong>{{ invoice.total_gross_amount_cents ? invoice.total_gross_amount_cents : 0 }} {{ invoice.currency }}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success mb-5"><font-awesome-icon icon="check" /> Submit</button>
+    </form>
+  </div>
+</div>
+
