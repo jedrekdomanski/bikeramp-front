@@ -4,6 +4,13 @@ import axios from 'axios'
 import Auth from './packages/auth/Auth.js'
 import router from './router'
 import store from './store/store'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCheck, faUser, faChartLine, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+library.add(faCheck, faUser, faChartLine, faSignOutAlt, faFacebook, faTwitter, faLinkedin)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Auth);
 
