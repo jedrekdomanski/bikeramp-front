@@ -11,18 +11,7 @@ export default {
         commit('signUpError');
       })
   },
-  login({ commit }, payload){
-    axios.post('/api/auth/login', payload)
-      .then(response => {
-        commit('authenticateUser', response.data.api_token)
-        localStorage.setItem('token', response.data.api_token)
-        localStorage.setItem('user', JSON.stringify(response.data.user))
-        router.push('/')
-      })
-      .catch(error => {
-        commit('showErrorAlert')
-      })
-  },
+  
   fetchUserRides({ commit }) {
     axios.get('/api/stats/current_week')
       .then(response => {
@@ -37,7 +26,7 @@ export default {
     commit('clearUserData');
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    router.replace('/')
+    router.push({ name: 'home' })
   },
   tryAutoLogin({ commit }){
     const token = localStorage.getItem('token')
@@ -75,14 +64,5 @@ export default {
       .catch(error => {
         console.log(error)
     })
-  },
-  saveUserProfile({ commit }, payload){
-    axios.patch('/api/users/' + payload.get('id'), payload)
-      .then(response => {
-        commit('saveUserProfile', response.data)
-        router.push('/profile/edit')
-      })
-      .catch(error => {
-      })
   }
 }
