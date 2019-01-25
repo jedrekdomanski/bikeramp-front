@@ -3,16 +3,16 @@
   export default {
     name: 'app',
     created(){
-      this.$store.dispatch('tryAutoLogin')
+      this.$store.dispatch('auth/tryAutoLogin')
     },
     computed: {
       authenticated(){
-        return this.$store.getters.signedIn
+        return this.$store.state.auth.signedIn
       }
     },
     methods: {
       logout(){
-        this.$store.dispatch('logout');
+        this.$store.dispatch('auth/logout');
       }
     }
   }
