@@ -62,15 +62,15 @@ export default new VueRouter({
     {
       path: '/invoices/new',
       name: 'NewInvoice',
-      component: () => import('./components/invoices/New.vue'),
+      component: () => import('./components/invoices/CreateInvoice.vue'),
       meta: {
         requiresAuth: true
       }
     },
     {
       path: '/invoices/show',
-      name: 'InvoicePreview',
-      component: () => import('./components/invoices/Show.vue'),
+      name: 'show-invoice',
+      component: () => import('./components/invoices/ShowInvoice.vue'),
       meta: {
         requiresAuth: true
       }
