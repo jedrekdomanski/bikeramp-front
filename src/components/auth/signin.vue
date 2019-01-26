@@ -18,7 +18,7 @@
     },
     computed: {
       showErrorAlert(){
-        return this.$store.getters.showErrorAlert;
+        
       }
     }
   }
