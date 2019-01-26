@@ -18,7 +18,7 @@
     "vue": "^2.5.22",
     "vue-chartjs": "^3.4.0",
     "vue-router": "^3.0.2",
-    "vue2-datepicker": "^2.8.0",
+    "vue2-datepicker": "^2.8.1",
     "vuejs-datepicker": "^1.5.4",
     "vuex": "^3.1.0"
   },
