@@ -38,7 +38,6 @@ export const actions = {
   async createRide({ commit, dispatch }, ride){
     await axios.post('/api/trips', ride)
       .then(response => {
-        console.log(response.data)
         commit('ADD_RIDE', response.data)
         const notification = {
           type: 'success',
