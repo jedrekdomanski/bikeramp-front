@@ -5,23 +5,18 @@
     </div>
     <nav>
       <ul>
-        <li v-if="!authenticated">
-          <router-link :to="{ name: 'signup' }">Sign Up</router-link>
-        </li>
-        <li v-if="!authenticated">
-          <router-link :to="{ name: 'signin' }">Sign In</router-link>
-        </li>
-        <li v-if="authenticated">
-          <router-link :to="{ name: 'userProfile' }"><font-awesome-icon icon="user" size="lg" /></router-link>
-        </li>
-        <li v-if="authenticated">
-          <router-link :to="{ name: 'dashboard' }"><font-awesome-icon icon="chart-line" size="lg"/></router-link>
-        </li>
-        <li v-if="authenticated">
-          <button @click="logout" class="logout"><font-awesome-icon icon="sign-out-alt" size="lg"/></button>
-        </li>
+        <template v-if="!authenticated">
+          <li><router-link :to="{ name: 'signup' }">Sign Up</router-link></li>
+          <li><router-link :to="{ name: 'signin' }">Sign In</router-link></li>
+        </template>
+        <template v-if="authenticated">
+          <li><router-link :to="{ name: 'userProfile' }"><font-awesome-icon icon="user" size="lg" /></router-link></li>
+          <li><router-link :to="{ name: 'dashboard' }"><font-awesome-icon icon="chart-line" size="lg"/></router-link></li>
+          <li><button @click="logout" class="logout"><font-awesome-icon icon="sign-out-alt" size="lg"/></button></li>
+        </template>
       </ul>
     </nav>
   </header>
+  <NotificationContainer/>
   <router-view></router-view>
 </div>

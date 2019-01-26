@@ -1,5 +1,7 @@
 <template src='./App.html'></template>
 <script>
+  import NotificationContainer from './components/notification/NotificationContainer.vue'
+
   export default {
     name: 'app',
     created(){
@@ -14,6 +16,9 @@
       logout(){
         this.$store.dispatch('auth/logout');
       }
+    },
+    components: {
+      NotificationContainer
     }
   }
 </script>
