@@ -17,7 +17,7 @@
   export default {
     computed: {
       signedIn(){
-        return this.$store.getters.signedIn
+        return this.$store.state.auth.signedIn
       }
     },
     components: { Ride }
