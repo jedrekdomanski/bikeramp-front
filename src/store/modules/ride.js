@@ -26,13 +26,18 @@ export const mutations = {
 }
 
 export const actions = {  
-  fetchUserRides({ commit }) {
+  fetchUserRides({ commit, dispatch }) {
     axios.get('/api/stats/current_week')
       .then(response => {
         commit('SET_RIDES', response)
       })
       .catch(error => {
-        console.log('Do something...')
+        const notification = {
+          type: 'danger',
+          message: 'There was a problem fetching your rides'
+        }
+        dispatch('notification/add', notification, { root: true })
+        throw error
       })
   },
   createRide({ commit, dispatch }, ride){
