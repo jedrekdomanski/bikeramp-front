@@ -1,5 +1,9 @@
 import axios from 'axios'
 import router from '../../router'
+import AuthService from '../../services/auth.service.js'
+import UserService from '../../services/user.service.js'
+
+let authService = new AuthService()
 
 export const namespaced = true
 
@@ -20,17 +24,23 @@ export const mutations = {
 }
 
 export const actions = {
-  signup({ commit }, payload){
-    axios.post('/api/auth', payload)
+  signup({ commit, dispatch }, payload){
+    authService.signup(payload)
       .then(response => {
-        console.log('Do something...')
+        router.push({ name: 'home' })
+
+        const notification = {
+          type: 'success',
+          message: 'You have successfully signed up. In order to continue, you must confirm your account'
+        }
+        dispatch('notification/add', notification, { root: true })
       })
       .catch(error => {
         console.log('Do something...')
       })
   },
   login({ commit, dispatch }, payload){
-    axios.post('/api/auth/login', payload)
+    authService.login(payload)
       .then(response => {
         commit('AUTHENTICATE_USER', response.data.api_token)
         localStorage.setItem('token', response.data.api_token)

@@ -3,15 +3,14 @@ import ApiService from './api.service';
 export default class AuthService {
 
   constructor() {
-    this.api = new ApiService('login');
+    this.api = new ApiService('auth');
   }
 
-  fetchCurrentUser() {
-    return this.api.get('user');
+  login(data) {
+    return this.api.post('login', data)
   }
 
-  logout() {
-    return this.api.post('logout');
+  signup(data) {
+    return this.api.post('', data)
   }
-
 };
