@@ -9,8 +9,7 @@
         start_address: '',
         destination_address: '',
         price_cents: '',
-        date: '',
-        loading: false
+        date: ''
       }
     },
     methods: {
@@ -21,10 +20,7 @@
           price_cents: this.price_cents,
           date: this.date
         }
-        this.loading = true
-        this.$store.dispatch('ride/createRide', formData).then(() => {
-          this.loading = false
-        })
+        this.$store.dispatch('ride/createRide', formData)
       }
     },
     computed: {
