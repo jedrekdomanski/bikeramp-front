@@ -7,20 +7,7 @@
   export default {
     data(){
       return {
-        currentUser: {
-          username: '',
-          email: '',
-          phoneNumber: '',
-          firstName: '',
-          lastName: '',
-          hourlyRate: '',
-          joined: '',
-          twitterUrl: '',
-          facebookUrl: '',
-          linkedInUrl: '',
-          ridesCount: null,
-          avatar: {}
-        }
+        currentUser: {}
       }
     },
     created(){
@@ -121,5 +108,11 @@
   }
   .btn-primary a {
     color: #fff;
+  }
+  .nav-item a {
+    color: #007bff;
+  }
+  .nav-item a:hover {
+    color: #fa923f;
   }
 </style>
