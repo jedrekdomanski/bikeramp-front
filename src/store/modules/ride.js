@@ -89,7 +89,11 @@ export const actions = {
         commit('SET_MONTHLY_STATS', response.data)
       })
       .catch(error => {
-        console.log(error)
+        const notification = {
+          type: 'danger',
+          message: 'There was a problem fetching your rides'
+        }
+        dispatch('notification/add', notification, { root: true })
     })
   },
   clearUserData({ commit }) {
