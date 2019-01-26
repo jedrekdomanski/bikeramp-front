@@ -45,8 +45,8 @@ export const actions = {
       })
       .catch(error => {
         const notification = {
-          type: 'error',
-          message: 'Invalid username or password'
+          type: 'danger',
+          message: 'There was a problem signing in. Check you username or password'
         }
         dispatch('notification/add', notification, { root: true })
         throw error
