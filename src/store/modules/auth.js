@@ -29,16 +29,27 @@ export const actions = {
         console.log('Do something...')
       })
   },
-  login({ commit }, payload){
+  login({ commit, dispatch }, payload){
     axios.post('/api/auth/login', payload)
       .then(response => {
         commit('AUTHENTICATE_USER', response.data.api_token)
         localStorage.setItem('token', response.data.api_token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
         router.push({ name: 'home' })
+
+        const notification = {
+          type: 'success',
+          message: 'You have successfully signed in'
+        }
+        dispatch('notification/add', notification, { root: true })
       })
       .catch(error => {
-        console.log('Do something...')
+        const notification = {
+          type: 'error',
+          message: 'Invalid username or password'
+        }
+        dispatch('notification/add', notification, { root: true })
+        throw error
       })
   },
   logout({ commit, dispatch }) {
