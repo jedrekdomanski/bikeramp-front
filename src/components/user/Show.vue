@@ -1,22 +1,12 @@
 <template src='./Show.html'></template>
 <script>
-  import UserService from '../../services/user.service'
-  
-  let userService;
+  import { mapGetters } from 'vuex'
 
   export default {
-    data(){
-      return {
-        currentUser: {}
-      }
-    },
     created(){
-      userService = new UserService();
-      userService.fetchCurrentUser()
-        .then(response => {
-          this.currentUser = Object.assign({}, response)
-        })
-    }
+      this.$store.dispatch('user/fetchCurrentUser')
+    },
+    computed: { ...mapGetters('user', ['currentUser'])}
   }
 </script>
 <style scoped>
