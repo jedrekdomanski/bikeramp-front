@@ -1,5 +1,10 @@
 import axios from 'axios'
 import { sum, sumBy, orderBy } from 'lodash'
+import StatisticsService from '../../services/statistics.service.js'
+import RideService from '../../services/ride.service.js'
+
+let statistcsService = new StatisticsService()
+let rideService = new RideService()
 
 export const namespaced = true
 
@@ -27,7 +32,7 @@ export const mutations = {
 
 export const actions = {  
   fetchUserRides({ commit, dispatch }) {
-    axios.get('/api/stats/current_week')
+    statistcsService.ridesForCurrentWeek()
       .then(response => {
         commit('SET_RIDES', response)
       })
@@ -41,7 +46,7 @@ export const actions = {
       })
   },
   createRide({ commit, dispatch }, ride){
-    axios.post('/api/trips', ride)
+    rideService.create(ride)
       .then(response => {
         commit('ADD_RIDE', response.data)
         const notification = {
@@ -60,7 +65,7 @@ export const actions = {
       })
   },
   deleteRide({ commit, dispatch }, payload){
-    axios.delete('/api/trips/' + payload.id)
+    rideService.destroy(payload.id)
       .then(response => {
         commit('REMOVE_RIDE', payload.index)
 
@@ -79,7 +84,7 @@ export const actions = {
       })
   },
   fetchMonthlyStats({ commit }){
-    axios.get('/api/stats/monthly')
+    statistcsService.ridesForCurrentYear()
       .then(response => {
         commit('SET_MONTHLY_STATS', response.data)
       })
