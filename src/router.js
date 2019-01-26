@@ -2,10 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SignupPage from './components/auth/signup.vue'
 import SigninPage from './components/auth/signin.vue'
+import NProgress from 'nprogress'
+import store from './store/store'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes: [
     {
@@ -16,7 +18,8 @@ export default new VueRouter({
     {
       path: '/signup',
       name: 'signup',
-      component: SignupPage, beforeEnter(to, from, next){
+      component: SignupPage,
+      beforeEnter(to, from, next){
         if (localStorage.token){
           next('/')
         } else {
@@ -27,7 +30,8 @@ export default new VueRouter({
     {
       path: '/signin', 
       name: 'signin', 
-      component: SigninPage, beforeEnter(to, from, next){
+      component: SigninPage,
+      beforeEnter(to, from, next){
         if (localStorage.token){
           next('/')
         } else {
@@ -76,4 +80,25 @@ export default new VueRouter({
       }
     }
   ]
-});
+})
+
+router.beforeEach(
+  (to, from, next) => {
+    NProgress.start()
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!Vue.auth.isAuthenticated()) {
+        next({
+          path: '/signin',
+        });
+      }
+    }
+
+    next();
+  }
+)
+
+router.afterEach(() => {
+  NProgress.done()
+})
+
+export default router

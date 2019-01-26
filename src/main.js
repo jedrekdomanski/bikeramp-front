@@ -4,6 +4,7 @@ import axios from 'axios'
 import Auth from './packages/auth/Auth.js'
 import router from './router'
 import store from './store/store'
+import 'nprogress/nprogress.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheck, faUser, faChartLine, faSignOutAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons'
@@ -19,20 +20,6 @@ axios.interceptors.request.use(config => {
   config.headers.common['Authorization'] = localStorage.getItem('token')
   return config;
 })
-
-router.beforeEach(
-  (to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      if (!Vue.auth.isAuthenticated()) {
-        next({
-          path: '/signin',
-        });
-      }
-    }
-
-    next();
-  }
-);
 
 new Vue({
   el: '#app',
