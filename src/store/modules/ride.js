@@ -46,7 +46,7 @@ export const actions = {
         commit('ADD_RIDE', response.data)
         const notification = {
           type: 'success',
-          message: 'Ride has been created'
+          message: 'Ride has been successfully created'
         }
         dispatch('notification/add', notification, { root: true })
       })
@@ -66,7 +66,7 @@ export const actions = {
 
         const notification = {
           type: 'success',
-          message: 'Ride has been deleted'
+          message: 'Ride has been successfully deleted'
         }
         dispatch('notification/add', notification, { root: true })
       })
