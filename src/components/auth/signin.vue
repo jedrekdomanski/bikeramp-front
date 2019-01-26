@@ -15,11 +15,6 @@
         }
         this.$store.dispatch('auth/login', formData);
       }
-    },
-    computed: {
-      showErrorAlert(){
-        
-      }
     }
   }
 </script>
