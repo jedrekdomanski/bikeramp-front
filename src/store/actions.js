@@ -1,17 +1,6 @@
 import axios from 'axios'
-import router from '../router'
 
 export default {
-  signup({ commit }, payload){
-    axios.post('/api/auth', payload)
-      .then(response => {
-        commit('signedUp')
-      })
-      .catch(error => {
-        commit('signUpError');
-      })
-  },
-  
   fetchUserRides({ commit }) {
     axios.get('/api/stats/current_week')
       .then(response => {
@@ -20,20 +9,6 @@ export default {
       .catch(error => {
         commit('serverResponsError')
       })
-  },
-  logout({ commit }) {
-    commit('clearAuthData');
-    commit('clearUserData');
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    router.push({ name: 'home' })
-  },
-  tryAutoLogin({ commit }){
-    const token = localStorage.getItem('token')
-    if (!token){
-      return
-    }
-    commit('authenticateUser', token)
   },
   async createRide({ commit }, ride){
     await axios.post('/api/trips', ride)
