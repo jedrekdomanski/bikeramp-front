@@ -5,8 +5,6 @@ export const namespaced = true
 
 export const state = {
   apiToken: null,
-  signedUp: false,
-  signUpError: false,
   signedIn: false
 }
 
@@ -37,7 +35,7 @@ export const actions = {
         commit('signedUp')
       })
       .catch(error => {
-        commit('signUpError');
+        commit('signUpError')
       })
   },
   login({ commit }, payload){
@@ -52,9 +50,10 @@ export const actions = {
         commit('showErrorAlert')
       })
   },
-  logout({ commit }) {
-    commit('clearAuthData');
-    commit('clearUserData');
+  logout({ commit, dispatch }) {
+    commit('clearAuthData')
+    // commit('clearUserData')
+    // dispatch('clearUserData')
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     router.push({ name: 'home' })

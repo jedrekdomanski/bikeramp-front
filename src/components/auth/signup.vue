@@ -19,16 +19,10 @@
           password: this.password,
           password_confirmation: this.password_confirmation
         }
-        this.$store.dispatch('signup', formData);
+        this.$store.dispatch('auth/signup', formData);
       }
     },
     computed: {
-      signedUp(){
-        return this.$store.getters.signedUp;
-      },
-      signUpError(){
-        return this.$store.getters.signUpError;
-      }
     }
   }
 </script>

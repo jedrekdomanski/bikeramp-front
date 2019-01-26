@@ -1,12 +1,6 @@
 import { sum, sumBy, orderBy } from 'lodash'
 
 export default {
-  signedUp: state => {
-    return state.auth.signedUp;
-  },
-  signUpError: state => {
-    return state.auth.signUpError;
-  },
   signedIn: state => {
     return state.auth.apiToken !== null;
   },
