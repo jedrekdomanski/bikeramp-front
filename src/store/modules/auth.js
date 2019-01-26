@@ -9,22 +9,13 @@ export const state = {
 }
 
 export const mutations = {
-  authenticateUser(state, payload) {
+  AUTHENTICATE_USER(state, payload) {
     state.apiToken = payload
     state.signedIn = true
   },
-  signedUp(state){
-    state.signedUp = true;
-  },
-  signUpError(state){
-    state.signUpError = true
-  },
-  clearAuthData(state){
+  CLEAR_AUTH_DATA(state){
     state.apiToken = null
     state.signedIn = false
-  },
-  clearUserData(state){
-    // state.data.rides = []
   }
 }
 
@@ -32,28 +23,27 @@ export const actions = {
   signup({ commit }, payload){
     axios.post('/api/auth', payload)
       .then(response => {
-        commit('signedUp')
+        console.log('Do something...')
       })
       .catch(error => {
-        commit('signUpError')
+        console.log('Do something...')
       })
   },
   login({ commit }, payload){
     axios.post('/api/auth/login', payload)
       .then(response => {
-        commit('authenticateUser', response.data.api_token)
+        commit('AUTHENTICATE_USER', response.data.api_token)
         localStorage.setItem('token', response.data.api_token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
         router.push({ name: 'home' })
       })
       .catch(error => {
-        commit('showErrorAlert')
+        console.log('Do something...')
       })
   },
   logout({ commit, dispatch }) {
-    commit('clearAuthData')
-    // commit('clearUserData')
-    // dispatch('clearUserData')
+    commit('CLEAR_AUTH_DATA')
+    dispatch('ride/clearUserData', { root: true })
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     router.push({ name: 'home' })
@@ -63,6 +53,12 @@ export const actions = {
     if (!token){
       return
     }
-    commit('authenticateUser', token)
+    commit('AUTHENTICATE_USER', token)
   }
+}
+
+export const getters = {
+  token: state => {
+    return state.apiToken
+  },
 }
