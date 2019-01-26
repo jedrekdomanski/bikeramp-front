@@ -69,4 +69,23 @@
   .close span {
     color: red;
   }
+
+  .box-content {
+    display: inline-block;
+    width: 200px;
+    padding: 10px;
+  }
+
+  .bottom {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .right {
+    border-right: 1px solid #ccc;
+  }
+
+  .trash-icon {
+    color: darkred;
+    cursor: pointer;
+  }
 </style>
