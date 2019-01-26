@@ -22,16 +22,13 @@
           date: this.date
         }
         this.loading = true
-        this.$store.dispatch('createRide', formData).then(() => {
+        this.$store.dispatch('ride/createRide', formData).then(() => {
           this.loading = false
         })
       }
     },
     computed: {
-      ...mapGetters([
-          'showErrorAlert',
-          'showSuccessAlert'
-      ])
+      
     },
     components: {
       Datepicker

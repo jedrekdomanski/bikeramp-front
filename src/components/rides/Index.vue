@@ -10,18 +10,18 @@
       }
     },
     created() {
-      this.$store.dispatch('fetchUserRides');
+      this.$store.dispatch('ride/fetchUserRides')
     },
     methods: {
       toggleButton(){
         this.clicked = !this.clicked
       },
       deleteRide(index, id){
-        this.$store.dispatch('deleteRide', { index: index, id: id });
+        this.$store.dispatch('ride/deleteRide', { index: index, id: id });
       }
     },
     computed: {
-      ...mapGetters([
+      ...mapGetters('ride',[
           'userRides',
           'weeklyTotals'
       ]),
