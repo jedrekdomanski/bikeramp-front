@@ -53,6 +53,13 @@ const router = new VueRouter({
       component: () => import('./components/user/Show.vue'),
       meta: {
         requiresAuth: true
+      },
+      props: true,
+      beforeEnter(to, from, next) {
+        store.dispatch('user/fetchCurrentUser').then(currentUser => {
+          to.params.currentUser = currentUser
+          next()
+        })
       }
     },
     {

@@ -1,12 +1,12 @@
 <template src='./Show.html'></template>
 <script>
-  import { mapGetters } from 'vuex'
-
   export default {
-    created(){
-      this.$store.dispatch('user/fetchCurrentUser')
-    },
-    computed: { ...mapGetters('user', ['currentUser'])}
+    props: {
+      currentUser: {
+        type: Object,
+        required: true
+      }
+    }
   }
 </script>
 <style scoped>

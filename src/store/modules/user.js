@@ -16,9 +16,10 @@ export const mutations = {
 
 export const actions = {
   fetchCurrentUser({ commit }) {
-    userService.fetchCurrentUser()
+    return userService.fetchCurrentUser()
       .then(response => {
         commit('SET_CURRENT_USER', response.data)
+        return response.data
       })
       .catch(error => {
         const notification = {
