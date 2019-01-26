@@ -58,6 +58,12 @@ export const actions = {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     router.push({ name: 'home' })
+
+    const notification = {
+      type: 'success',
+      message: 'You have successfully signed out'
+    }
+    dispatch('notification/add', notification, { root: true })
   },
   tryAutoLogin({ commit }){
     const token = localStorage.getItem('token')
