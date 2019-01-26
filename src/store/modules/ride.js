@@ -47,20 +47,30 @@ export const actions = {
       })
       .catch(error => {
         const notification = {
-          type: 'error',
+          type: 'danger',
           message: 'There was a problem creating your ride'
         }
         dispatch('notification/add', notification, { root: true })
         throw error
       })
   },
-  deleteRide({ commit }, payload){
+  deleteRide({ commit, dispatch }, payload){
     axios.delete('/api/trips/' + payload.id)
       .then(response => {
         commit('REMOVE_RIDE', payload.index)
+
+        const notification = {
+          type: 'success',
+          message: 'Ride has been deleted'
+        }
+        dispatch('notification/add', notification, { root: true })
       })
       .catch(error => {
-        console.log('Do something ...')
+        const notification = {
+          type: 'danger',
+          message: 'There was a problem deleting your ride'
+        }
+        dispatch('notification/add', notification, { root: true })
       })
   },
   fetchMonthlyStats({ commit }){
