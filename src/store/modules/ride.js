@@ -13,8 +13,8 @@ export const state = {
 }
 
 export const mutations = {
-  SET_RIDES(state, payload){
-    state.data = payload.data
+  SET_RIDES(state, data){
+    state.data = data
   },
   ADD_RIDE(state, ride){
     state.data.push(ride)
@@ -34,7 +34,7 @@ export const actions = {
   fetchUserRides({ commit, dispatch }) {
     statistcsService.ridesForCurrentWeek()
       .then(response => {
-        commit('SET_RIDES', response)
+        commit('SET_RIDES', response.data)
       })
       .catch(error => {
         const notification = {
