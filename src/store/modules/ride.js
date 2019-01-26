@@ -35,17 +35,24 @@ export const actions = {
         console.log('Do something...')
       })
   },
-  async createRide({ commit }, ride){
+  async createRide({ commit, dispatch }, ride){
     await axios.post('/api/trips', ride)
       .then(response => {
         console.log(response.data)
         commit('ADD_RIDE', response.data)
-      })
-      .then(response => {
-        console.log('SUCCESS')
+        const notification = {
+          type: 'success',
+          message: 'Ride has been created'
+        }
+        dispatch('notification/add', notification, { root: true })
       })
       .catch(error => {
-        console.log('FAILURE')
+        const notification = {
+          type: 'error',
+          message: 'There was a problem creating your ride'
+        }
+        dispatch('notification/add', notification, { root: true })
+        throw error
       })
   },
   deleteRide({ commit }, payload){
