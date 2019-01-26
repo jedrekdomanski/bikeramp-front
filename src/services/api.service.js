@@ -35,36 +35,6 @@ export default class ApiService {
               method,
               data,
               params,
-           })
-             .then((response) => response.data)
-             .catch((error) => {
-              console.log(error)
-                this.$errorHandler(error.response.data);
-                throw error;
-            });
-  }
-
-  /**
-   * Handle all errors coming from a response.
-   *
-   * @param {Object} data
-   */
-  $errorHandler(data) {
-      let message;
-      let stack = [];
-
-      if (data.message) {
-          message = data.message;
-      } else {
-          message = 'Your request could not be processed correctly.';
-      }
-
-      if (data.errors) {
-          for (const field of Object.values(data.errors)) {
-              stack.push(...field);
-          }
-      }
-
-      flashError(message, stack);
+           })       
   }
 }
