@@ -23,7 +23,7 @@
               <td >{{ ride.distance }}</td>
               <td >{{ ride.price }}</td>
               <td >{{ ride.date }}</td>
-              <td><font-awesome-icon icon="trash" size="md" @click="deleteRide(index, ride.id)" class="trash-icon"/></td>
+              <td><font-awesome-icon icon="trash" @click="deleteRide(index, ride.id)" class="trash-icon"/></td>
             </tr>
           </tbody>
         </table>
