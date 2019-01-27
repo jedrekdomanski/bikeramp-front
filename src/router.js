@@ -85,6 +85,15 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('./components/NotFound.vue')
+    },
+    {
+      path: '*',
+      redirect: { name: '404' }
     }
   ]
 })
