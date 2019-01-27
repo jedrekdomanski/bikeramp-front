@@ -64,7 +64,7 @@ export const actions = {
   },
   logout({ commit, dispatch }) {
     commit('CLEAR_AUTH_DATA')
-    dispatch('ride/clearUserData', { root: true })
+    dispatch('ride/clearUserData', null, { root: true })
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     router.push({ name: 'home' })
