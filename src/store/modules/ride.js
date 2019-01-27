@@ -31,7 +31,7 @@ export const mutations = {
 }
 
 export const actions = {  
-  fetchUserRides({ commit, dispatch }) {
+  fetchRides({ commit, dispatch }) {
     statistcsService.ridesForCurrentWeek()
       .then(response => {
         commit('SET_RIDES', response.data)
@@ -102,7 +102,7 @@ export const actions = {
 }
 
 export const getters = {
-  userRides: state => {
+  rides: state => {
     let rides = state.data
     let ridesSortedByDate = orderBy(rides, ['date'], ['asc'])
     return ridesSortedByDate
