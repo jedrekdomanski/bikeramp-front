@@ -93,4 +93,8 @@
     cursor: pointer
   }
 
+  #nprogress .spinner {
+    top: 60px;
+  }
+
 </style>
