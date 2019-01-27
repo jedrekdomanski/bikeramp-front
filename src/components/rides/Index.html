@@ -17,7 +17,7 @@
             <th>Date</th>
           </thead>
           <tbody>
-            <tr v-for="(ride, index) in userRides" :key="ride.id">
+            <tr v-for="(ride, index) in rides" :key="ride.id">
               <td >{{ ride.start_address }}</td>
               <td >{{ ride.destination_address }}</td>
               <td >{{ ride.distance }}</td>

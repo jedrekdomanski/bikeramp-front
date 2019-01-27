@@ -10,7 +10,7 @@
       }
     },
     created() {
-      this.$store.dispatch('ride/fetchUserRides')
+      this.$store.dispatch('ride/fetchRides')
     },
     methods: {
       toggleButton(){
@@ -22,7 +22,7 @@
     },
     computed: {
       ...mapGetters('ride',[
-          'userRides',
+          'rides',
           'weeklyTotals'
       ]),
       btnText(){
