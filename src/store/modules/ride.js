@@ -2,6 +2,7 @@ import axios from 'axios'
 import { sum, sumBy, orderBy } from 'lodash'
 import StatisticsService from '../../services/statistics.service.js'
 import RideService from '../../services/ride.service.js'
+import NProgress from 'nprogress'
 
 let statistcsService = new StatisticsService()
 let rideService = new RideService()
@@ -46,6 +47,7 @@ export const actions = {
       })
   },
   createRide({ commit, dispatch }, ride){
+    NProgress.start()
     rideService.create(ride)
       .then(response => {
         commit('ADD_RIDE', response.data)
@@ -63,6 +65,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
         throw error
       })
+      NProgress.done()
   },
   deleteRide({ commit, dispatch }, payload){
     rideService.destroy(payload.id)
