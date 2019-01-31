@@ -92,6 +92,11 @@ const router = new VueRouter({
       component: () => import('./components/NotFound.vue')
     },
     {
+      path: 'network-issue',
+      name: 'network-issue',
+      component: () => import('./components/NetworkIssue.vue')
+    },
+    {
       path: '*',
       redirect: { name: '404' }
     }
