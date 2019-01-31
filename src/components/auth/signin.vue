@@ -1,5 +1,6 @@
 <template src="./signin.html"></template>
 <script>
+  import { required, email } from 'vuelidate/lib/validators'
   export default {
     data () {
       return {
@@ -9,11 +10,20 @@
     },
     methods: {
       onSubmit () {
-        const formData = {
-          email: this.email,
-          password: this.password,
+        this.$v.$touch()
+        if (!this.$v.invalid) {
+          const formData = {
+            email: this.email,
+            password: this.password,
+          }
+          this.$store.dispatch('auth/login', formData)
         }
-        this.$store.dispatch('auth/login', formData);
+      }
+    },
+    validations: {
+      email: {
+        required,
+        email
       }
     }
   }

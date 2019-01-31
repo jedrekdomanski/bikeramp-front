@@ -6,7 +6,13 @@
         <input
                 type="email"
                 id="email"
-                v-model="email">
+                v-model.trim="email"
+                :class="{ error: $v.email.$error}"
+                @blur="$v.email.$touch()">
+        <div v-if="$v.email.$error">
+          <p v-if="!$v.email.email" class="errorMessage">Please enter a valid email</p>
+          <p v-if="!$v.email.required" class="errorMessage">Email is required</p>
+        </div>
       </div>
       <div class="input">
         <label for="password">Password</label>
@@ -16,7 +22,8 @@
                 v-model="password">
       </div>
       <div class="submit">
-        <button type="submit">Submit</button>
+        <button type="submit" :disabled="$v.$invalid">Submit</button>
+        <p v-if="$v.$anyError" class="errorMessage">Please fill out the requried fields</p>
       </div>
     </form>
   </div>

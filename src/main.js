@@ -4,6 +4,7 @@ import axios from 'axios'
 import Auth from './packages/auth/Auth.js'
 import router from './router'
 import store from './store/store'
+import Vuelidate from 'vuelidate'
 import 'nprogress/nprogress.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheck, faUser, faChartLine, faSignOutAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +15,7 @@ library.add(faCheck, faUser, faChartLine, faSignOutAlt, faFacebook, faTwitter, f
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(Auth);
+Vue.use(Vuelidate)
 
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.interceptors.request.use(config => {
