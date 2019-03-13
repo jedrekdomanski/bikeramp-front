@@ -7,10 +7,10 @@ import store from './store/store'
 import Vuelidate from 'vuelidate'
 import 'nprogress/nprogress.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck, faUser, faChartLine, faSignOutAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faUser, faChartLine, faSignOutAlt, faTrash, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faCheck, faUser, faChartLine, faSignOutAlt, faFacebook, faTwitter, faLinkedin, faTrash)
+library.add(faCheck, faUser, faChartLine, faSignOutAlt, faFacebook, faTwitter, faLinkedin, faTrash, faFileInvoiceDollar)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -29,13 +29,3 @@ new Vue({
   store,
   render: h => h(App)
 })
-
-window.eventHub = new Vue();
-
-window.flash = function (message, type = 'success', stack = []) {
-  eventHub.$emit('push-error', message, type, stack);
-};
-
-window.flashError = function (message, stack = []) {
-  flash(message, 'danger', stack);
-};

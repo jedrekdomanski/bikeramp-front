@@ -10,6 +10,7 @@
           <li><router-link :to="{ name: 'signin' }">Sign In</router-link></li>
         </template>
         <template v-if="authenticated">
+          <li><router-link :to="{ name: 'NewInvoice' }"><font-awesome-icon icon="file-invoice-dollar" size="lg" /></router-link></li>
           <li><router-link :to="{ name: 'userProfile' }"><font-awesome-icon icon="user" size="lg" /></router-link></li>
           <li><router-link :to="{ name: 'dashboard' }"><font-awesome-icon icon="chart-line" size="lg"/></router-link></li>
           <li><button @click="logout" class="logout"><font-awesome-icon icon="sign-out-alt" size="lg"/></button></li>
