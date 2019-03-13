@@ -24,19 +24,19 @@
       userService = new UserService();
       userService.fetchCurrentUser()
         .then(response => {
-          this.accountInfo.firstName = response.first_name
-          this.accountInfo.lastName = response.last_name
-          this.accountInfo.phoneNumber = response.phone_number
-          this.accountInfo.facebookUrl = response.facebook_url
-          this.accountInfo.twitterUrl = response.twitter_url
-          this.accountInfo.linkedInUrl = response.linked_in_url
-          this.accountInfo.hourlyRate = response.hourly_rate
-          this.accountInfo.id = response.id
+          this.accountInfo.firstName = response.data.first_name
+          this.accountInfo.lastName = response.data.last_name
+          this.accountInfo.phoneNumber = response.data.phone_number
+          this.accountInfo.facebookUrl = response.data.facebook_url
+          this.accountInfo.twitterUrl = response.data.twitter_url
+          this.accountInfo.linkedInUrl = response.data.linked_in_url
+          this.accountInfo.hourlyRate = response.data.hourly_rate
+          this.accountInfo.id = response.data.id
         })
     },
     methods: {
       onSubmit(){
-        let userService = new UserService()
+        userService = new UserService()
         const form = new FormData()
         form.append('first_name', this.accountInfo.firstName)
         form.append('last_name', this.accountInfo.lastName)
@@ -46,17 +46,16 @@
         form.append('linked_in_url', this.accountInfo.linkedInUrl)
         form.append('hourly_rate', this.accountInfo.hourlyRate)
         form.append('avatar', this.accountInfo.avatar, this.accountInfo.avatar.name)
-
         userService.update(this.accountInfo.id, form)
           .then(response => {
-            if (response.status === 204) {
+            if (response.status === 200) {
               this.$router.push({ name: 'userProfile' })
             } else {
               console.log(response)
             }
           })
           .catch(error => {
-            
+            console.log(error)
           })
       },
       onFileSelected(event){
